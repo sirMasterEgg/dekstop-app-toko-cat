@@ -1,2 +1,2 @@
-# dekstop-app-toko-cat
-Proyek akhir Pemrograman Client Server
+# Desktop App Toko Cat
+Dibuat sebagai proyek akhir Pemrograman Client Server
