@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toko cat", "toko cat\toko cat.csproj", "{C6D8DD06-081A-44D7-ABC6-EF3E9B7EEC17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toko cat", "toko cat\toko cat.csproj", "{CEFD6763-DAF2-48FB-BF08-1DC2990A8C6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C6D8DD06-081A-44D7-ABC6-EF3E9B7EEC17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6D8DD06-081A-44D7-ABC6-EF3E9B7EEC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6D8DD06-081A-44D7-ABC6-EF3E9B7EEC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6D8DD06-081A-44D7-ABC6-EF3E9B7EEC17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEFD6763-DAF2-48FB-BF08-1DC2990A8C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEFD6763-DAF2-48FB-BF08-1DC2990A8C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEFD6763-DAF2-48FB-BF08-1DC2990A8C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEFD6763-DAF2-48FB-BF08-1DC2990A8C6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1FB078F6-A680-4990-9096-A0C93FEF5B61}
+		SolutionGuid = {36440D7D-77B9-466D-B9C4-F746AA181CB8}
 	EndGlobalSection
 EndGlobal
