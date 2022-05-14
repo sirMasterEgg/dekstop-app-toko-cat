@@ -69,6 +69,7 @@ namespace toko_cat
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
@@ -76,8 +77,10 @@ namespace toko_cat
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1058, 213);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // label1
             // 
@@ -185,6 +188,7 @@ namespace toko_cat
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(254, 22);
             this.textBox2.TabIndex = 11;
+            this.textBox2.TextChanged += new System.EventHandler(this.generateID);
             // 
             // textBox3
             // 
@@ -193,6 +197,7 @@ namespace toko_cat
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(254, 22);
             this.textBox3.TabIndex = 12;
+            this.textBox3.TextChanged += new System.EventHandler(this.generateID);
             // 
             // textBox4
             // 
@@ -201,6 +206,7 @@ namespace toko_cat
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(254, 22);
             this.textBox4.TabIndex = 13;
+            this.textBox4.TextChanged += new System.EventHandler(this.generateID);
             // 
             // textBox5
             // 
@@ -209,6 +215,7 @@ namespace toko_cat
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(254, 22);
             this.textBox5.TabIndex = 14;
+            this.textBox5.TextChanged += new System.EventHandler(this.generateID);
             // 
             // textBox6
             // 
@@ -217,6 +224,7 @@ namespace toko_cat
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(254, 22);
             this.textBox6.TabIndex = 15;
+            this.textBox6.TextChanged += new System.EventHandler(this.generateID);
             // 
             // textBox7
             // 
@@ -225,6 +233,7 @@ namespace toko_cat
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(254, 22);
             this.textBox7.TabIndex = 16;
+            this.textBox7.TextChanged += new System.EventHandler(this.generateID);
             // 
             // label10
             // 
@@ -245,24 +254,26 @@ namespace toko_cat
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(254, 24);
             this.comboBox1.TabIndex = 18;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.generateID);
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.numericUpDown1.Increment = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
             this.numericUpDown1.Location = new System.Drawing.Point(657, 294);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            999999999,
-            0,
+            -1530494977,
+            232830,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(254, 22);
             this.numericUpDown1.TabIndex = 19;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.generateID);
             // 
             // radioButton1
             // 
@@ -275,6 +286,7 @@ namespace toko_cat
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Aktif";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.generateID);
             // 
             // radioButton2
             // 
@@ -287,6 +299,7 @@ namespace toko_cat
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Tidak Aktif";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.generateID);
             // 
             // button1
             // 
@@ -297,6 +310,7 @@ namespace toko_cat
             this.button1.TabIndex = 22;
             this.button1.Text = "Insert";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -308,6 +322,7 @@ namespace toko_cat
             this.button2.TabIndex = 23;
             this.button2.Text = "Update";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -319,6 +334,7 @@ namespace toko_cat
             this.button3.TabIndex = 24;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -329,6 +345,7 @@ namespace toko_cat
             this.button4.TabIndex = 25;
             this.button4.Text = "Clear";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -375,6 +392,7 @@ namespace toko_cat
             this.Controls.Add(this.dataGridView1);
             this.Name = "HumanResource";
             this.Text = "HumanResource";
+            this.Load += new System.EventHandler(this.HumanResource_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
