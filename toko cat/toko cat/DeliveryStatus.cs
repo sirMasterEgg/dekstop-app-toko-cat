@@ -21,5 +21,10 @@ namespace toko_cat
         {
             this.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is a report...");
+        }
     }
 }

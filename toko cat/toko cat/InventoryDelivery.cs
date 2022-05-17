@@ -25,5 +25,10 @@ namespace toko_cat
             form.Dispose();
             this.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is a report...");
+        }
     }
 }
