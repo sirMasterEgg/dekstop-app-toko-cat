@@ -102,6 +102,7 @@ namespace toko_cat
             button3.Enabled = false;
             button4.Enabled = true;
             button5.Enabled = false;
+            button6.Enabled = true;
             mode = 1;
         }
 
@@ -194,6 +195,13 @@ namespace toko_cat
                 Connection.Conn.Close();
                 MessageBox.Show("User tidak dapat dihapus!");
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            HRCatatanSupervisor form = new HRCatatanSupervisor(Convert.ToInt32(textBox1.Text));
+            form.ShowDialog();
+            form.Dispose();
         }
     }
 }
