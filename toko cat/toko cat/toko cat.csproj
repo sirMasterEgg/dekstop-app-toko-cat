@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeliveryStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveryStatus.Designer.cs">
+      <DependentUpon>DeliveryStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,13 +77,25 @@
       <DependentUpon>HumanResource.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="InventoryDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryDelivery.Designer.cs">
+      <DependentUpon>InventoryDelivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DeliveryStatus.resx">
+      <DependentUpon>DeliveryStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HRCatatanSupervisor.resx">
       <DependentUpon>HRCatatanSupervisor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HumanResource.resx">
       <DependentUpon>HumanResource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryDelivery.resx">
+      <DependentUpon>InventoryDelivery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
