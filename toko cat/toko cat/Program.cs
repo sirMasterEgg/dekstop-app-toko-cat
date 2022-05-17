@@ -16,7 +16,7 @@ namespace toko_cat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Supervisor());
+            Application.Run(new InventoryDelivery());
         }
     }
 }

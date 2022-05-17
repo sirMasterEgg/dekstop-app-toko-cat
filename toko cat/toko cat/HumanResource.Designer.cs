@@ -56,6 +56,7 @@ namespace toko_cat
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -357,12 +358,24 @@ namespace toko_cat
             this.button5.TabIndex = 26;
             this.button5.Text = "Tampilkan Catatan Supervisor";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button6.Location = new System.Drawing.Point(512, 454);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(406, 31);
+            this.button6.TabIndex = 27;
+            this.button6.Text = "Tampilkan Report Semua Employee";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // HumanResource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 543);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -391,7 +404,7 @@ namespace toko_cat
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "HumanResource";
-            this.Text = "HumanResource";
+            this.Text = "Human Resource";
             this.Load += new System.EventHandler(this.HumanResource_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -429,5 +442,6 @@ namespace toko_cat
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
