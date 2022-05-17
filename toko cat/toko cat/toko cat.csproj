@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToko.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToko.Designer.cs">
+      <DependentUpon>AddToko.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,21 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Supervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supervisor.Designer.cs">
+      <DependentUpon>Supervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupervisorAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupervisorAdd.Designer.cs">
+      <DependentUpon>SupervisorAdd.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddToko.resx">
+      <DependentUpon>AddToko.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HumanResource.resx">
       <DependentUpon>HumanResource.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +100,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Supervisor.resx">
+      <DependentUpon>Supervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupervisorAdd.resx">
+      <DependentUpon>SupervisorAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
