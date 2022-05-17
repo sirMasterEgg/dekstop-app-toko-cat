@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="AddToko.Designer.cs">
       <DependentUpon>AddToko.cs</DependentUpon>
+	</Compile>
     <Compile Include="DeliveryStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +105,7 @@
     </Compile>
     <EmbeddedResource Include="AddToko.resx">
       <DependentUpon>AddToko.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveryStatus.resx">
       <DependentUpon>DeliveryStatus.cs</DependentUpon>
     </EmbeddedResource>
