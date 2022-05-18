@@ -10,7 +10,15 @@
 create database if not exists db_toko_cat;
 use db_toko_cat;
 
+DROP TABLE IF EXISTS visit;
 DROP TABLE IF EXISTS type;
+DROP TABLE IF EXISTS note;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS toko;
+DROP TABLE IF EXISTS dtrans_item;
+DROP TABLE IF EXISTS htrans_item;
+DROP TABLE IF EXISTS item;
+
 create table type
 (
     TY_ID   int auto_increment primary key,
@@ -28,7 +36,6 @@ values (4, 'Inventory and Delivery Manager');
 insert into type(TY_ID, TY_NAME)
 values (5, 'Human Resource');
 
-DROP TABLE IF EXISTS user;
 create table user
 (
     US_ID       int auto_increment primary key,
@@ -59,8 +66,19 @@ values (4, 'user4', 'user4', 'User 4', 'user4@examplemail.com', '0123456789', 'J
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
 values (5, 'user5', 'user5', 'User 5', 'user5@examplemail.com', '0123456789', 'Jalan User 5', 5, 1234567890, 1);
+insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
+                 US_STATUS)
+values (6, 'sales1', 'sales1', 'Sales 1', 'sales1@examplemail.com', '0123456789', 'Jalan Sales 1', 1, 1234567890, 1);
+insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
+                 US_STATUS)
+values (6, 'sales2', 'sales2', 'Sales 2', 'sales2@examplemail.com', '0123456789', 'Jalan Sales 2', 1, 1234567890, 1);
+insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
+                 US_STATUS)
+values (6, 'sales3', 'sales3', 'Sales 3', 'sales3@examplemail.com', '0123456789', 'Jalan Sales 3', 1, 1234567890, 1);
+insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
+                 US_STATUS)
+values (6, 'sales4', 'sales4', 'Sales 4', 'sales4@examplemail.com', '0123456789', 'Jalan Sales 4', 1, 1234567890, 1);
 
-DROP TABLE IF EXISTS note;
 create table note
 (
     NO_ID                int auto_increment primary key,
@@ -81,7 +99,6 @@ values (4, 'User 4 ini adalah contoh user dengan tipe Inventory and Delivery Man
 insert into note(NO_ID, NO_TEXT, NO_US_ID)
 values (5, 'User 5 ini adalah contoh user dengan tipe Human Resource.', 5);
 
-DROP TABLE IF EXISTS toko;
 create table toko
 (
     TOKO_ID   INT AUTO_INCREMENT PRIMARY KEY,
@@ -95,7 +112,6 @@ values (2, 'Toko Cat Hehe');
 insert into toko (TOKO_ID, TOKO_NAME)
 values (3, 'Toko Cat Hoho');
 
-DROP TABLE IF EXISTS visit;
 create table visit
 (
     V_ID      INT AUTO_INCREMENT PRIMARY KEY,
@@ -114,31 +130,58 @@ values (2, 2, '2018-04-06 13:30:12', 1, 2);
 insert into visit (V_ID, V_TOKO_ID, V_TANGGAL,V_STATUS, V_US_ID)
 values (3, 3, '2019-04-06 13:30:12', 0, 2);
 
--- create table item(
--- IT_ID int auto_increment primary key,
--- IT_NAME varchar(100) not null,
--- IT_PRICE int not null,
--- IT_STOCK int not null,
--- IT_STATUS int not null default 1
--- );
+create table item(
+	IT_ID int auto_increment primary key,
+	IT_NAME varchar(100) not null,
+	IT_PRICE int not null,
+	IT_STOCK int not null,
+	IT_STATUS int not null default 1
+);
 
--- create table htrans(
--- HT_ID int auto_increment primary key,
--- HT_INVOICE_NUMBER varchar(10) not null,
--- HT_TOTAL int not null,
--- HT_STATUS int not null default 1
--- )
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Earthy Tone', 50000, 200, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (2, 'CobaCat Warna Burnt Orange', 45000, 150, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Pastel', 60000, 100, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Hazelnut', 40000, 100, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Merah Bata', 50000, 250, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Abu Lilac', 40000, 150, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Coral', 50000, 100, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Beige', 55000, 225, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Broken White', 55000, 170, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Peach', 45000, 200, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Khaki', 30000, 100, 1);
+insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
+values (1, 'CobaCat Warna Ivory', 55000, 250, 1);
 
--- create table dtrans(
--- DT_ID int auto_increment primary key,
--- DT_IT_ID int not null,
--- DT_AMOUNT int not null,
--- DT_SUBTOTAL int not null,
--- DT_HT_ID int not null,
--- DT_STATUS int not null default 1,
--- foreign key(DT_IT_ID) references item(IT_ID),
--- foreign key(DT_HT_ID) references htrans(HT_ID)
--- )
+create table htrans_item(
+	HT_ID int auto_increment primary key,
+	HT_TO_ID int not null,
+	HT_INVOICE_NUMBER varchar(10) not null,
+	HT_TOTAL int not null,
+	HT_STATUS int not null default 1,
+	foreign key(HT_TO_ID) references toko(TOKO_ID)
+);
+
+create table dtrans_item(
+	DT_ID int auto_increment primary key,
+	DT_IT_ID int not null,
+	DT_AMOUNT int not null,
+	DT_SUBTOTAL int not null,
+	DT_HT_ID int not null,
+	DT_STATUS int not null default 1,
+	foreign key(DT_IT_ID) references item(IT_ID),
+	foreign key(DT_HT_ID) references htrans_item(HT_ID)
+);
 
 -- create table order(
 -- OD_ID int auto_increment primary key,

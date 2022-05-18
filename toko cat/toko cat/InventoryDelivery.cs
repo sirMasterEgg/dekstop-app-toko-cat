@@ -30,5 +30,10 @@ namespace toko_cat
         {
             MessageBox.Show("This is a report...");
         }
+
+        private void InventoryDelivery_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
