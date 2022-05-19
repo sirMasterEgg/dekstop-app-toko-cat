@@ -134,6 +134,9 @@
     <EmbeddedResource Include="DeliveryStatus.resx">
       <DependentUpon>DeliveryStatus.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HRCatatanSupervisor.resx">
       <DependentUpon>HRCatatanSupervisor.cs</DependentUpon>
     </EmbeddedResource>
