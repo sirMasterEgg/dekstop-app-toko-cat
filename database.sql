@@ -71,13 +71,13 @@ insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, U
 values (6, 'sales1', 'sales1', 'Sales 1', 'sales1@examplemail.com', '0123456789', 'Jalan Sales 1', 1, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (6, 'sales2', 'sales2', 'Sales 2', 'sales2@examplemail.com', '0123456789', 'Jalan Sales 2', 1, 1234567890, 1);
+values (7, 'sales2', 'sales2', 'Sales 2', 'sales2@examplemail.com', '0123456789', 'Jalan Sales 2', 1, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (6, 'sales3', 'sales3', 'Sales 3', 'sales3@examplemail.com', '0123456789', 'Jalan Sales 3', 1, 1234567890, 1);
+values (8, 'sales3', 'sales3', 'Sales 3', 'sales3@examplemail.com', '0123456789', 'Jalan Sales 3', 1, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (6, 'sales4', 'sales4', 'Sales 4', 'sales4@examplemail.com', '0123456789', 'Jalan Sales 4', 1, 1234567890, 1);
+values (9, 'sales4', 'sales4', 'Sales 4', 'sales4@examplemail.com', '0123456789', 'Jalan Sales 4', 1, 1234567890, 1);
 
 create table note
 (
@@ -143,25 +143,25 @@ values (1, 'CobaCat Warna Earthy Tone', 50000, 200, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
 values (2, 'CobaCat Warna Burnt Orange', 45000, 150, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Pastel', 60000, 100, 1);
+values (3, 'CobaCat Warna Pastel', 60000, 100, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Hazelnut', 40000, 100, 1);
+values (4, 'CobaCat Warna Hazelnut', 40000, 100, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Merah Bata', 50000, 250, 1);
+values (5, 'CobaCat Warna Merah Bata', 50000, 250, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Abu Lilac', 40000, 150, 1);
+values (6, 'CobaCat Warna Abu Lilac', 40000, 150, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Coral', 50000, 100, 1);
+values (7, 'CobaCat Warna Coral', 50000, 100, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Beige', 55000, 225, 1);
+values (8, 'CobaCat Warna Beige', 55000, 225, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Broken White', 55000, 170, 1);
+values (9, 'CobaCat Warna Broken White', 55000, 170, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Peach', 45000, 200, 1);
+values (10, 'CobaCat Warna Peach', 45000, 200, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Khaki', 30000, 100, 1);
+values (11, 'CobaCat Warna Khaki', 30000, 100, 1);
 insert into item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS)
-values (1, 'CobaCat Warna Ivory', 55000, 250, 1);
+values (12, 'CobaCat Warna Ivory', 55000, 250, 1);
 
 create table htrans_item(
 	HT_ID int auto_increment primary key,
