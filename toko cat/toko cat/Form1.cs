@@ -67,9 +67,9 @@ namespace toko_cat
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "3") // Admin
             {
                 this.Hide();
-                //Form form = new Admin();
-                //form.ShowDialog();
-                //form.Dispose();
+                Form form = new Admin();
+                form.ShowDialog();
+                form.Dispose();
                 this.Show();
             }
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "4") // Inventory and Delivery Manager
