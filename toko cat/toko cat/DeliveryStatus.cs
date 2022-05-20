@@ -29,7 +29,7 @@ namespace toko_cat
             textBox1.Text = "";
             button1.Enabled = false;
             DataTable dt = new DataTable("htrans_item");
-            MySqlCommand cmd = new MySqlCommand("select HT_ID as ID, TOKO_NAME as Toko, HT_INVOICE_NUMBER as \"Nomor Invoice\", concat('Rp ', format(HT_TOTAL, 0)) as Total, if(HT_STATUS = 1, 'Sedang Diproses', 'Sudah Selesai') as Status from htrans_item join toko on HT_TO_ID = TOKO_ID where HT_STATUS > 0 order by HT_ID", Connection.Conn);
+            MySqlCommand cmd = new MySqlCommand("select HT_ID as ID, TOKO_NAME as Toko, HT_INVOICE_NUMBER as \"Nomor Invoice\", concat('Rp ', format(HT_TOTAL, 0)) as Total from htrans_item join toko on HT_TO_ID = TOKO_ID where HT_STATUS = 2 order by HT_ID", Connection.Conn);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -41,21 +41,14 @@ namespace toko_cat
             {
                 textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 index = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                if (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString() == "Sedang Diproses")
-                {
-                    button1.Enabled = true;
-                }
-                else
-                {
-                    button1.Enabled = false;
-                }
+                button1.Enabled = true;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Connection.Conn.Open();
-            MySqlCommand cmd = new MySqlCommand("update htrans_item set HT_STATUS = 2 where HT_ID = @htid", Connection.Conn);
+            MySqlCommand cmd = new MySqlCommand("update htrans_item set HT_STATUS = 3 where HT_ID = @htid", Connection.Conn);
             cmd.Parameters.AddWithValue("@htid", index);
             cmd.ExecuteNonQuery();
             Connection.Conn.Close();
