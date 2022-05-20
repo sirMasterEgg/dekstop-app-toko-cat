@@ -20,16 +20,31 @@ namespace toko_cat
         private void catalogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SalesmanCatalog.catalog.Show();
+            SalesmanCatalog cata = new SalesmanCatalog();
+
+            cata.StartPosition = FormStartPosition.CenterScreen;
+
+            cata.ShowDialog();
+            cata.Dispose();
         }
 
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SalesmanCatalog.order.Show();
+            SalesmanOrder order = new SalesmanOrder();
+
+            order.StartPosition = FormStartPosition.CenterScreen;
+
+            order.ShowDialog();
+            order.Dispose();
         }
 
         private void historyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SalesmanHistory_FormClosing(object sender, FormClosingEventArgs e)
         {
             
         }

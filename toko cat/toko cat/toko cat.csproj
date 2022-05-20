@@ -71,6 +71,7 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Barang.cs" />
     <Compile Include="DeliveryStatus.cs">
       <SubType>Form</SubType>
     </Compile>

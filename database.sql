@@ -68,16 +68,16 @@ insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, U
 values (5, 'user5', 'user5', 'User 5', 'user5@examplemail.com', '0123456789', 'Jalan User 5', 5, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (6, 'sales1', 'sales1', 'Sales 1', 'sales1@examplemail.com', '0123456789', 'Jalan Sales 1', 1, 1234567890, 1);
+values (6, 'sales1', 'sales1', 'Sales 1', 'sales1@examplemail.com', '0123456789', 'Jalan Sales 1', 2, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (7, 'sales2', 'sales2', 'Sales 2', 'sales2@examplemail.com', '0123456789', 'Jalan Sales 2', 1, 1234567890, 1);
+values (7, 'sales2', 'sales2', 'Sales 2', 'sales2@examplemail.com', '0123456789', 'Jalan Sales 2', 2, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (8, 'sales3', 'sales3', 'Sales 3', 'sales3@examplemail.com', '0123456789', 'Jalan Sales 3', 1, 1234567890, 1);
+values (8, 'sales3', 'sales3', 'Sales 3', 'sales3@examplemail.com', '0123456789', 'Jalan Sales 3', 2, 1234567890, 1);
 insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY,
                  US_STATUS)
-values (9, 'sales4', 'sales4', 'Sales 4', 'sales4@examplemail.com', '0123456789', 'Jalan Sales 4', 1, 1234567890, 1);
+values (9, 'sales4', 'sales4', 'Sales 4', 'sales4@examplemail.com', '0123456789', 'Jalan Sales 4', 2, 1234567890, 1);
 
 create table note
 (
@@ -165,11 +165,13 @@ values (12, 'CobaCat Warna Ivory', 55000, 250, 1);
 
 create table htrans_item(
 	HT_ID int auto_increment primary key,
+	HT_US_ID int not null,
 	HT_TO_ID int not null,
 	HT_INVOICE_NUMBER varchar(10) not null,
 	HT_TOTAL int not null,
 	HT_STATUS int not null default 1,
-	foreign key(HT_TO_ID) references toko(TOKO_ID)
+	foreign key(HT_TO_ID) references toko(TOKO_ID),
+	foreign key(HT_US_ID) references user(US_ID)
 );
 
 create table dtrans_item(

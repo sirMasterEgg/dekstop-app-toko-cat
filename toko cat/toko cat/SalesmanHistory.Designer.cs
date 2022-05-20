@@ -76,7 +76,8 @@ namespace toko_cat
             this.ClientSize = new System.Drawing.Size(550, 450);
             this.Controls.Add(this.menuStrip1);
             this.Name = "SalesmanHistory";
-            this.Text = "SalesmanHistory";
+            this.Text = "History";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalesmanHistory_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

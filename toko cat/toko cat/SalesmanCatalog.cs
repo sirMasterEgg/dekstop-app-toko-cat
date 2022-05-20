@@ -13,9 +13,7 @@ namespace toko_cat
 {
     public partial class SalesmanCatalog : Form
     {
-        public static SalesmanCatalog catalog = new SalesmanCatalog();
-        public static SalesmanHistory history = new SalesmanHistory();
-        public static SalesmanOrder order = new SalesmanOrder();
+        public static int salesBelumDiClose = 1;
         public SalesmanCatalog()
         {
             InitializeComponent();
@@ -46,13 +44,23 @@ namespace toko_cat
         private void orderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SalesmanCatalog.order.Show();
+            SalesmanOrder order = new SalesmanOrder();
+
+            order.StartPosition = FormStartPosition.CenterScreen;
+
+            order.ShowDialog();
+            order.Dispose();
         }
 
         private void historyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SalesmanCatalog.history.Show();
+            SalesmanHistory hist = new SalesmanHistory();
+
+            hist.StartPosition = FormStartPosition.CenterScreen;
+
+            hist.ShowDialog();
+            hist.Dispose();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -61,6 +69,11 @@ namespace toko_cat
         }
 
         private void SalesmanCatalog_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SalesmanCatalog_FormClosing(object sender, FormClosingEventArgs e)
         {
 
         }

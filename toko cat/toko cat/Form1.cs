@@ -13,6 +13,9 @@ namespace toko_cat
 {
     public partial class Form1 : Form
     {
+        public static int idUserLogin;
+        public static String namaUserLogin;
+
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +36,42 @@ namespace toko_cat
         private void Form1_Load(object sender, EventArgs e)
         {
             button1.Enabled = false;
+        }
+
+        private void generateFunctionInvoice()
+        {
+            try
+            {
+                Connection.openConn();
+
+                MySqlScript script = new MySqlScript(Connection.Conn);
+
+                script.Query = @"CREATE OR REPLACE
+                                FUNCTION `db_toko_cat`.`generateInvoice`()
+                                RETURNS VARCHAR(50)
+                                BEGIN
+	                            DECLARE hasil VARCHAR(50);
+	
+	                            DECLARE banyakInvoice INT;
+	
+	                            SELECT CONCAT('1',SUBSTR(YEAR(NOW()),3,2),
+	                            IF(MONTH(NOW()) >= 10, MONTH(NOW()), CONCAT('0',MONTH(NOW()))),
+	                            IF(DAY(NOW())>=10, DAY(NOW()), CONCAT('0',DAY(NOW()))),
+	                            '1') INTO hasil;
+	
+	                            SELECT COUNT(*) INTO banyakInvoice FROM htrans_item WHERE ht_invoice_number LIKE CONCAT(hasil, '%');
+		
+	                            SET hasil = CONCAT(hasil,LPAD(banyakInvoice+1,3,'0'));
+	
+	                            RETURN hasil;
+                                END$$";
+                script.Delimiter = @"$$";
+                script.Execute();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,10 +97,19 @@ namespace toko_cat
             }
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "2") // Salesperson
             {
+                generateFunctionInvoice();
+
+                idUserLogin = int.Parse(dt.Rows[0]["US_ID"].ToString());
+                namaUserLogin = dt.Rows[0]["US_NAME"].ToString();
                 this.Hide();
-                Form form = new SalesmanCatalog();
-                form.ShowDialog();
-                form.Dispose();
+
+                SalesmanCatalog catalog = new SalesmanCatalog();
+
+                catalog.StartPosition = FormStartPosition.CenterScreen;
+
+                catalog.ShowDialog();
+                catalog.Dispose();
+
                 this.Show();
             }
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "3") // Admin

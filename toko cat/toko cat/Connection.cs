@@ -10,6 +10,23 @@ namespace toko_cat
 
         public static MySqlConnection Conn { get => conn; set => conn = value; }
 
+        public static void openConn()
+        {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+
+            try
+            {
+                conn.Open();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Error : " + ex.Message.ToString());
+            }
+        }
+
         public static void executeNonQuery(MySqlCommand cmd)
         {
             cmd.Connection = conn;
