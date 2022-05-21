@@ -39,9 +39,18 @@ CREATE TABLE `day` (
   `DA_ID` int(11) NOT NULL AUTO_INCREMENT,
   `DA_NAME` varchar(50) NOT NULL,
   PRIMARY KEY (`DA_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `day` */
+
+insert  into `day`(`DA_ID`,`DA_NAME`) values 
+(1,'Senin'),
+(2,'Selasa'),
+(3,'Rabu'),
+(4,'Kamis'),
+(5,'Jumat'),
+(6,'Sabtu'),
+(7,'Minggu');
 
 /*Table structure for table `dtrans_item` */
 
@@ -59,9 +68,21 @@ CREATE TABLE `dtrans_item` (
   KEY `DT_HT_ID` (`DT_HT_ID`),
   CONSTRAINT `dtrans_item_ibfk_1` FOREIGN KEY (`DT_IT_ID`) REFERENCES `item` (`IT_ID`),
   CONSTRAINT `dtrans_item_ibfk_2` FOREIGN KEY (`DT_HT_ID`) REFERENCES `htrans_item` (`HT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `dtrans_item` */
+
+insert  into `dtrans_item`(`DT_ID`,`DT_IT_ID`,`DT_AMOUNT`,`DT_SUBTOTAL`,`DT_HT_ID`,`DT_STATUS`) values 
+(1,1,1,50000,1,1),
+(2,2,1,45000,2,1),
+(3,3,1,60000,3,1),
+(4,4,1,40000,4,1),
+(5,5,1,50000,5,1),
+(6,6,1,40000,1,1),
+(7,7,1,50000,2,1),
+(8,8,1,55000,3,1),
+(9,9,1,55000,4,1),
+(10,10,1,45000,5,1);
 
 /*Table structure for table `htrans_item` */
 
@@ -80,9 +101,16 @@ CREATE TABLE `htrans_item` (
   KEY `HT_US_ID` (`HT_US_ID`),
   CONSTRAINT `htrans_item_ibfk_1` FOREIGN KEY (`HT_TO_ID`) REFERENCES `toko` (`TOKO_ID`),
   CONSTRAINT `htrans_item_ibfk_2` FOREIGN KEY (`HT_US_ID`) REFERENCES `user` (`US_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `htrans_item` */
+
+insert  into `htrans_item`(`HT_ID`,`HT_US_ID`,`HT_TO_ID`,`HT_DATE`,`HT_INVOICE_NUMBER`,`HT_TOTAL`,`HT_STATUS`) values 
+(1,6,1,'2022-05-21 17:11:57','12205211001',90000,1),
+(2,7,2,'2022-05-21 17:11:57','12205211002',95000,1),
+(3,8,3,'2022-05-21 17:11:57','12205211003',115000,1),
+(4,9,4,'2022-05-21 17:11:57','12205211004',95000,1),
+(5,10,5,'2022-05-21 17:11:57','12205211005',95000,1);
 
 /*Table structure for table `item` */
 
@@ -144,14 +172,16 @@ CREATE TABLE `toko` (
   `TOKO_ID` int(11) NOT NULL AUTO_INCREMENT,
   `TOKO_NAME` varchar(500) NOT NULL,
   PRIMARY KEY (`TOKO_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `toko` */
 
 insert  into `toko`(`TOKO_ID`,`TOKO_NAME`) values 
-(1,'Toko Cat Haha'),
-(2,'Toko Cat Hehe'),
-(3,'Toko Cat Hoho');
+(1,'Toko Haha'),
+(2,'Toko Hehe'),
+(3,'Toko Hihi'),
+(4,'Toko Hoho'),
+(5,'Toko Huhu');
 
 /*Table structure for table `type` */
 
@@ -190,7 +220,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`US_ID`),
   KEY `US_TY_ID` (`US_TY_ID`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`US_TY_ID`) REFERENCES `type` (`TY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
@@ -203,7 +233,8 @@ insert  into `user`(`US_ID`,`US_USERNAME`,`US_PASSWORD`,`US_NAME`,`US_EMAIL`,`US
 (6,'sales1','sales1','Sales 1','sales1@examplemail.com','0123456789','Jalan Sales 1',2,1234567890,1),
 (7,'sales2','sales2','Sales 2','sales2@examplemail.com','0123456789','Jalan Sales 2',2,1234567890,1),
 (8,'sales3','sales3','Sales 3','sales3@examplemail.com','0123456789','Jalan Sales 3',2,1234567890,1),
-(9,'sales4','sales4','Sales 4','sales4@examplemail.com','0123456789','Jalan Sales 4',2,1234567890,1);
+(9,'sales4','sales4','Sales 4','sales4@examplemail.com','0123456789','Jalan Sales 4',2,1234567890,1),
+(10,'sales5','sales5','Sales 5','sales5@examplemail.com','0123456789','Jalan Sales 5',2,1234567890,1);
 
 /*Table structure for table `visit` */
 
@@ -223,6 +254,74 @@ CREATE TABLE `visit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `visit` */
+
+/* Function  structure for function  `generateIDDtrans` */
+
+/*!50003 DROP FUNCTION IF EXISTS `generateIDDtrans` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateIDDtrans`() RETURNS varchar(50) CHARSET utf8mb4
+BEGIN
+                                    DECLARE idBesar INT;
+                                    DECLARE banyak_dtrans INT;
+
+                                    SELECT COUNT(*) INTO banyak_dtrans FROM dtrans_item;
+
+                                    IF (banyak_dtrans > 0) THEN
+                                            SELECT dt_id INTO idBesar FROM dtrans_item ORDER BY dt_id DESC LIMIT 1;
+                                    ELSE
+                                            SET idBesar = 0;
+                                    END IF;
+
+                                    RETURN idBesar+1;
+                                END */$$
+DELIMITER ;
+
+/* Function  structure for function  `generateIDHtrans` */
+
+/*!50003 DROP FUNCTION IF EXISTS `generateIDHtrans` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateIDHtrans`() RETURNS varchar(50) CHARSET utf8mb4
+BEGIN
+                                    DECLARE idBesar INT;
+                                    DECLARE banyak_htrans INT;
+
+                                    SELECT COUNT(*) INTO banyak_htrans FROM htrans_item;
+
+                                    IF (banyak_htrans > 0) THEN
+                                            SELECT ht_id INTO idBesar FROM htrans_item ORDER BY ht_id DESC LIMIT 1;
+                                    ELSE
+                                            SET idBesar = 0;
+                                    END IF;
+
+                                    RETURN idBesar+1;
+                                END */$$
+DELIMITER ;
+
+/* Function  structure for function  `generateInvoice` */
+
+/*!50003 DROP FUNCTION IF EXISTS `generateInvoice` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateInvoice`() RETURNS varchar(50) CHARSET utf8mb4
+BEGIN
+                                    DECLARE hasil VARCHAR(50);
+
+                                    DECLARE banyakInvoice INT;
+
+                                    SELECT CONCAT('1',SUBSTR(YEAR(NOW()),3,2),
+                                    IF(MONTH(NOW()) >= 10, MONTH(NOW()), CONCAT('0',MONTH(NOW()))),
+                                    IF(DAY(NOW())>=10, DAY(NOW()), CONCAT('0',DAY(NOW()))),
+                                    '1') INTO hasil;
+
+                                    SELECT COUNT(*) INTO banyakInvoice FROM htrans_item WHERE ht_invoice_number LIKE CONCAT(hasil, '%');
+
+                                    SET hasil = CONCAT(hasil,LPAD(banyakInvoice+1,3,'0'));
+
+                                    RETURN hasil;
+                                END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
