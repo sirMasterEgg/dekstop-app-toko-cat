@@ -25,6 +25,8 @@ namespace toko_cat
         private void Supervisor_Load(object sender, EventArgs e)
         {
             loadDataGrid();
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
         }
 
         private void loadDataGrid()
@@ -40,7 +42,7 @@ namespace toko_cat
 
             cmd.Connection = conn;
 
-            cmd.CommandText = @"select date_format(v.V_TANGGAL, '%W, %d %M %Y') as 'Jadwal Visit', t.TOKO_NAME as 'Toko Tujuan', u.US_NAME as 'Nama Sales', if(v.V_STATUS = 0, 'Belum dikunjungi', 'Sudah dikunjungi') as Status from visit v
+            cmd.CommandText = @"select V_ID as 'ID Visit', date_format(v.V_TANGGAL, '%W, %d %M %Y') as 'Jadwal Visit', t.TOKO_NAME as 'Toko Tujuan', u.US_NAME as 'Nama Sales', if(v.V_STATUS = 0, 'Belum dikunjungi', 'Sudah dikunjungi') as Status from visit v
                 join toko t on t.TOKO_ID = v.V_TOKO_ID
                 join user u on u.US_ID = v.V_US_ID";
             conn.Open();
@@ -65,6 +67,68 @@ namespace toko_cat
             SupervisorAdd add = new SupervisorAdd();
             add.ShowDialog();
             loadDataGrid();
+        }
+
+
+        private int id = -1;
+        private void dgvSupervisor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            id = Convert.ToInt32(dgvSupervisor.Rows[e.RowIndex].Cells[0].Value);
+            string status = dgvSupervisor.Rows[e.RowIndex].Cells["Status"].Value.ToString();
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            
+            if (status == "Belum dikunjungi")
+            {
+                radioButton2.Checked = true;
+            }
+            else
+            {
+                radioButton1.Checked = true;
+            }
+        }
+
+        private void gantiStatus()
+        {
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+
+            int status = radioButton1.Checked ? 1 : 0;
+
+            try
+            {
+                cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "update visit set V_STATUS = @status where V_ID = @id;";
+                cmd.Parameters.Add(new MySqlParameter("@id", id));
+                cmd.Parameters.Add(new MySqlParameter("@status", status));
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
+            loadDataGrid();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            gantiStatus();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            gantiStatus();
+        }
+
+        private void tambahKomentarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesStatus status = new SalesStatus();
+            status.ShowDialog();
         }
     }
 }
