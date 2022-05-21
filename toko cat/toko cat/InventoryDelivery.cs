@@ -25,7 +25,9 @@ namespace toko_cat
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is a report...");
+            ReportInventory form = new ReportInventory();
+            form.ShowDialog();
+            form.Dispose();
         }
 
         private void InventoryDelivery_Load(object sender, EventArgs e)

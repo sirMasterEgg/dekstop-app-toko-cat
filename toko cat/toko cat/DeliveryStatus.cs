@@ -21,7 +21,9 @@ namespace toko_cat
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is a report...");
+            ReportDelivery form = new ReportDelivery();
+            form.ShowDialog();
+            form.Dispose();
         }
 
         private void DeliveryStatus_Load(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace toko_cat
             textBox1.Text = "";
             button1.Enabled = false;
             DataTable dt = new DataTable("htrans_item");
-            MySqlCommand cmd = new MySqlCommand("select HT_ID as ID, TOKO_NAME as Toko, HT_INVOICE_NUMBER as \"Nomor Invoice\", concat('Rp ', format(HT_TOTAL, 0)) as Total from htrans_item join toko on HT_TO_ID = TOKO_ID where HT_STATUS = 2 order by HT_ID", Connection.Conn);
+            MySqlCommand cmd = new MySqlCommand("select HT_ID as ID, US_NAME as Sales, TOKO_NAME as Toko, HT_DATE as \"Tanggal Transaksi\", HT_INVOICE_NUMBER as \"Nomor Invoice\", concat('Rp ', format(HT_TOTAL, 0)) as Total from htrans_item join toko on HT_TO_ID = TOKO_ID join user on HT_US_ID = US_ID where HT_STATUS = 2 order by HT_ID", Connection.Conn);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -39,7 +41,7 @@ namespace toko_cat
         {
             if (e.RowIndex != -1)
             {
-                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 index = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                 button1.Enabled = true;
             }

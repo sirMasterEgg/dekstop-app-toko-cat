@@ -3,16 +3,16 @@ using System.Windows.Forms;
 
 namespace toko_cat
 {
-    public partial class ReportHR : Form
+    public partial class ReportInventory : Form
     {
-        public ReportHR()
+        public ReportInventory()
         {
             InitializeComponent();
         }
 
-        private void ReportHR_Load(object sender, EventArgs e)
+        private void ReportInventory_Load(object sender, EventArgs e)
         {
-            EmployeeReport report = new EmployeeReport();
+            InventoryReport report = new InventoryReport();
             crystalReportViewer1.ReportSource = report;
         }
     }

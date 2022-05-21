@@ -368,7 +368,7 @@ namespace toko_cat
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(406, 31);
             this.button6.TabIndex = 27;
-            this.button6.Text = "Tampilkan Report Semua Employee";
+            this.button6.Text = "Tampilkan Report Semua Salesperson";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
