@@ -206,7 +206,9 @@ namespace toko_cat
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is a report...");
+            ReportHR form = new ReportHR();
+            form.ShowDialog();
+            form.Dispose();
         }
     }
 }
