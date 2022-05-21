@@ -25,18 +25,24 @@ namespace toko_cat
             loadAwal();
         }
 
+        private void loadGenerateInvoice()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT generateInvoice();";
+
+            invoice.Text = Connection.executeString(cmd);
+        }
+
         private void loadAwal()
         {
             loadToko();
             kosongkanData();
             loadDgvBarang();
+            loadGenerateInvoice();
 
             namaSales.Text = Form1.namaUserLogin;
 
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT generateInvoice();";
-
-            invoice.Text = Connection.executeString(cmd);
+            comboBox1.SelectedIndex = -1;
         }
 
         private void kosongkanData()
@@ -44,9 +50,16 @@ namespace toko_cat
             belanja.Clear();
             loadDgvBelanja();
 
+            clearTambah();
+        }
+
+        private void clearTambah()
+        {
             namaBarang.Text = "";
             jumlahBarang.Value = 0;
-            comboBox1.SelectedIndex = -1;
+
+            idxBarangDipilih = -1;
+            idxBarangOrderDipilih = -1;
         }
 
         private void clearTambahBelanja()
@@ -109,9 +122,13 @@ namespace toko_cat
 
         private void loadDgvBelanja()
         {
+            enableButton();
+
             int totalBelanja = 0;
             if (belanja.Count == 0)
             {
+                tableBelanja = new DataTable();
+
                 tableBelanja.Columns.Add("No");
                 tableBelanja.Columns.Add("Nama Barang");
                 tableBelanja.Columns.Add("Jumlah");
@@ -135,6 +152,22 @@ namespace toko_cat
             }
 
             total.Text = totalBelanja.ToString();
+        }
+
+        private void enableButton()
+        {
+            if (belanja.Count == 0)
+            {
+                btnOrder.Enabled = false;
+                btnClear.Enabled = false;
+            }
+            else { btnOrder.Enabled = true; btnClear.Enabled = true; }
+
+            if (idxBarangDipilih != -1 || idxBarangOrderDipilih != -1) tambahBarang.Enabled = true;
+            else tambahBarang.Enabled = false;
+
+            if (idxBarangOrderDipilih != -1) btnDelete.Enabled = true;
+            else btnDelete.Enabled = false;
         }
 
         private void catalogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -184,6 +217,7 @@ namespace toko_cat
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             idxBarangDipilih = e.RowIndex;
+            enableButton();
             updateBarangPilih();
         }
 
@@ -209,57 +243,71 @@ namespace toko_cat
 
         private void tambahBarang_Click(object sender, EventArgs e)
         {
-            if (mode == 0)
+            if (jumlahBarang.Value > 0)
             {
-                int idxKetemu = cariUdahPernahBeli();
-
-                int stock = int.Parse(barang.Rows[idxBarangDipilih][3].ToString());
-
-                if (idxKetemu != -1)
+                if (mode == 0)
                 {
-                    if (jumlahBarang.Value + belanja[idxKetemu].jumlah <= stock )
+                    int idxKetemu = cariUdahPernahBeli();
+
+                    int stock = int.Parse(barang.Rows[idxBarangDipilih][3].ToString());
+
+                    if (idxKetemu != -1)
                     {
-                        belanja[idxKetemu].updateJumlah((int)jumlahBarang.Value + belanja[idxKetemu].jumlah);
+                        if (jumlahBarang.Value + belanja[idxKetemu].jumlah <= stock)
+                        {
+                            belanja[idxKetemu].updateJumlah((int)jumlahBarang.Value + belanja[idxKetemu].jumlah);
 
-                        loadDgvBelanja();
+                            loadDgvBelanja();
 
-                        clearTambahBelanja();
+                            clearTambahBelanja();
+                        }
+                        else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
                     }
-                    else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
+                    else
+                    {
+                        if (stock >= jumlahBarang.Value)
+                        {
+
+                            int id = int.Parse(barang.Rows[idxBarangDipilih][0].ToString());
+                            String nama = barang.Rows[idxBarangDipilih][1].ToString();
+                            int price = int.Parse(barang.Rows[idxBarangDipilih][2].ToString());
+                            belanja.Add(new Barang(id, nama, price, (int)jumlahBarang.Value));
+
+                            loadDgvBelanja();
+
+                            clearTambahBelanja();
+                        }
+                        else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
+                    }
                 }
                 else
                 {
+                    int stock = -1;
+
+                    foreach (DataRow item in barang.Rows)
+                    {
+                        if (int.Parse(item[0].ToString()) == belanja[idxBarangOrderDipilih].id)
+                        {
+                            stock = int.Parse(item[3].ToString());
+                        }
+                    }
+
                     if (stock >= jumlahBarang.Value)
                     {
-
-                        int id = int.Parse(barang.Rows[idxBarangDipilih][0].ToString());
-                        String nama = barang.Rows[idxBarangDipilih][1].ToString();
-                        int price = int.Parse(barang.Rows[idxBarangDipilih][2].ToString());
-                        belanja.Add(new Barang(id, nama, price, (int)jumlahBarang.Value));
+                        belanja[idxBarangOrderDipilih].updateJumlah((int)jumlahBarang.Value);
 
                         loadDgvBelanja();
 
+                        mode = 0;
+
                         clearTambahBelanja();
+
+                        clearTambah();
                     }
                     else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
                 }
             }
-            else
-            {
-                int stock = int.Parse(barang.Rows[idxBarangDipilih][3].ToString());
-
-                if (stock >= jumlahBarang.Value)
-                {
-                    belanja[idxBarangOrderDipilih].updateJumlah((int)jumlahBarang.Value);
-
-                    loadDgvBelanja();
-
-                    mode = 0;
-
-                    clearTambahBelanja();
-                }
-                else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
-            }
+            else MessageBox.Show("Jumlah Barang Harus Lebih Dari 0 !");
         }
 
         private void dgvBarangOrder_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -268,7 +316,83 @@ namespace toko_cat
 
             mode = 1;
 
+            enableButton();
+
             clearTambahBelanja();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            belanja.RemoveAt(idxBarangOrderDipilih);
+
+            loadDgvBelanja();
+            clearTambah();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            kosongkanData();
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == -1) MessageBox.Show("Pilih Terlebih Dahulu Toko Tujuan !");
+            else
+            {
+                MySqlTransaction trans = Connection.Conn.BeginTransaction();
+
+                try
+                {
+                    int idToko = (comboBox1.SelectedItem as dynamic).Id;
+
+                    MySqlCommand cmdIDh = new MySqlCommand();
+                    cmdIDh.CommandText = "SELECT generateIDHtrans();";
+                    String idH = Connection.executeString(cmdIDh);
+
+                    MySqlCommand cmdInsert = new MySqlCommand();
+                    cmdInsert.CommandText = "INSERT INTO htrans_item VALUES(@a, @b, @c, now(), @d, @e, @f);";
+                    cmdInsert.Parameters.AddWithValue("@a", idH);
+                    cmdInsert.Parameters.AddWithValue("@b", Form1.idUserLogin);
+                    cmdInsert.Parameters.AddWithValue("@c", idToko);
+                    cmdInsert.Parameters.AddWithValue("@d", invoice.Text);
+                    cmdInsert.Parameters.AddWithValue("@e", total.Text);
+                    cmdInsert.Parameters.AddWithValue("@f", 1);
+                    Connection.executeNonQuery(cmdInsert);
+
+                    foreach (Barang item in belanja)
+                    {
+                        MySqlCommand cmdIDd = new MySqlCommand();
+                        cmdIDd.CommandText = "SELECT generateIDDtrans();";
+                        String idD = Connection.executeString(cmdIDd);
+
+                        MySqlCommand cmdInsertD = new MySqlCommand();
+                        cmdInsertD.CommandText = "INSERT INTO dtrans_item VALUES(@a, @b, @c, @d, @e, 1);";
+                        cmdInsertD.Parameters.AddWithValue("@a", idD);
+                        cmdInsertD.Parameters.AddWithValue("@b", item.id);
+                        cmdInsertD.Parameters.AddWithValue("@c", item.jumlah);
+                        cmdInsertD.Parameters.AddWithValue("@d", item.subtotal);
+                        cmdInsertD.Parameters.AddWithValue("@e", idH);
+                        Connection.executeNonQuery(cmdInsertD);
+                    }
+
+                    Connection.openConn();
+                    trans.Commit();
+
+                    loadGenerateInvoice();
+                    kosongkanData();
+                }
+                catch (MySqlException ex)
+                {
+                    Connection.openConn();
+                    trans.Rollback();
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

@@ -74,6 +74,74 @@ namespace toko_cat
             }
         }
 
+        private void generateFunctionIDHtrans()
+        {
+            try
+            {
+                Connection.openConn();
+
+                MySqlScript script = new MySqlScript(Connection.Conn);
+
+                script.Query = @"CREATE OR REPLACE
+                                FUNCTION `db_toko_cat`.`generateIDHtrans`()
+                                RETURNS VARCHAR(50)
+                                BEGIN
+	                            DECLARE idBesar INT;
+	                            DECLARE banyak_htrans INT;
+	
+	                            SELECT COUNT(*) INTO banyak_htrans FROM htrans_item;
+	
+	                            IF (banyak_htrans > 0) THEN
+		                            SELECT ht_id INTO idBesar FROM htrans_item ORDER BY ht_id DESC LIMIT 1;
+	                            ELSE 
+		                            SET idBesar = 0;
+	                            END IF;
+	
+	                            RETURN idBesar+1;
+                                END$$";
+                script.Delimiter = @"$$";
+                script.Execute();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+        }
+
+        private void generateFunctionIDDtrans()
+        {
+            try
+            {
+                Connection.openConn();
+
+                MySqlScript script = new MySqlScript(Connection.Conn);
+
+                script.Query = @"CREATE OR REPLACE
+                                FUNCTION `db_toko_cat`.`generateIDDtrans`()
+                                RETURNS VARCHAR(50)
+                                BEGIN
+	                            DECLARE idBesar INT;
+	                            DECLARE banyak_dtrans INT;
+	
+	                            SELECT COUNT(*) INTO banyak_dtrans FROM dtrans_item;
+	
+	                            IF (banyak_dtrans > 0) THEN
+		                            SELECT dt_id INTO idBesar FROM dtrans_item ORDER BY dt_id DESC LIMIT 1;
+	                            ELSE 
+		                            SET idBesar = 0;
+	                            END IF;
+	
+	                            RETURN idBesar+1;
+                                END$$";
+                script.Delimiter = @"$$";
+                script.Execute();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable("user");
@@ -98,6 +166,8 @@ namespace toko_cat
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "2") // Salesperson
             {
                 generateFunctionInvoice();
+                generateFunctionIDHtrans();
+                generateFunctionIDDtrans();
 
                 idUserLogin = int.Parse(dt.Rows[0]["US_ID"].ToString());
                 namaUserLogin = dt.Rows[0]["US_NAME"].ToString();
