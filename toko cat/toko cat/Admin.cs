@@ -31,13 +31,18 @@ namespace toko_cat
             da = new MySqlDataAdapter();
 
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT h.HT_INVOICE_NUMBER, t.TOKO_NAME, HT_STATUS FROM htrans_item h JOIN toko t";
+            cmd.CommandText = "SELECT h.HT_INVOICE_NUMBER as 'Invoice', t.TOKO_NAME as 'Nama Toko' FROM htrans_item h JOIN toko t ON t.toko_id = h.ht_to_id WHERE ht_status = 1";
 
             Connection.executeNonQuery(cmd);
 
             da.SelectCommand = cmd;
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

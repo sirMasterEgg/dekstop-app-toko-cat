@@ -109,6 +109,12 @@
     <Compile Include="InventoryDelivery.Designer.cs">
       <DependentUpon>InventoryDelivery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Invoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportHR.cs">
@@ -171,6 +177,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryDelivery.resx">
       <DependentUpon>InventoryDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Invoice.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

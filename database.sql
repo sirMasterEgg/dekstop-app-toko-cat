@@ -112,23 +112,30 @@ values (2, 'Toko Cat Hehe');
 insert into toko (TOKO_ID, TOKO_NAME)
 values (3, 'Toko Cat Hoho');
 
+create table day
+(
+	DA_ID INT AUTO_INCREMENT PRIMARY KEY,
+	DA_NAME VARCHAR(50) NOT NULL
+)
+
 create table visit
 (
-    V_ID      INT AUTO_INCREMENT PRIMARY KEY,
+    V_ID INT AUTO_INCREMENT PRIMARY KEY,
     V_TOKO_ID INT,
-    V_TANGGAL DATETIME NOT NULL,
+    V_DA_ID INT NOT NULL
     V_STATUS  INT      NOT NULL,
     V_US_ID   INT      NOT NULL,
     FOREIGN KEY (V_US_ID) REFERENCES user (US_ID),
     FOREIGN KEY (V_TOKO_ID) REFERENCES toko (TOKO_ID)
 );
 
-insert into visit (V_ID, V_TOKO_ID, V_TANGGAL,V_STATUS, V_US_ID)
-values (1, 1, '2017-04-06 13:30:12', 1, 2);
-insert into visit (V_ID, V_TOKO_ID, V_TANGGAL,V_STATUS, V_US_ID)
-values (2, 2, '2018-04-06 13:30:12', 1, 2);
-insert into visit (V_ID, V_TOKO_ID, V_TANGGAL,V_STATUS, V_US_ID)
-values (3, 3, '2019-04-06 13:30:12', 0, 2);
+create table absen 
+(
+	AB_ID INT AUTO_INCREMENT PRIMARY KEY,
+	AB_US_ID INT NOT NULL,
+	AB_DATE DATETIME NOT NULL,
+	FOREIGN KEY (AB_US_ID) REFERENCES user (US_ID)
+)
 
 create table item(
 	IT_ID int auto_increment primary key,
