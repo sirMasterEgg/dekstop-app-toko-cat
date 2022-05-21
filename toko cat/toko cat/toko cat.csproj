@@ -71,6 +71,12 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminAddOrderItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAddOrderItem.Designer.cs">
+      <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Barang.cs" />
     <Compile Include="DeliveryReport.cs">
       <AutoGen>True</AutoGen>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminAddOrderItem.resx">
+      <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeliveryReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
