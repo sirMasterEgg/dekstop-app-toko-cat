@@ -159,6 +159,12 @@
     <Compile Include="ReportInventory.Designer.cs">
       <DependentUpon>ReportInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportPenjualan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportPenjualan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SalesmanCatalog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,12 +200,6 @@
     </Compile>
     <Compile Include="SupervisorAdd.Designer.cs">
       <DependentUpon>SupervisorAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SupervisorReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SupervisorReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="AddToko.resx">
       <DependentUpon>AddToko.cs</DependentUpon>
@@ -262,6 +262,10 @@
     <EmbeddedResource Include="ReportInventory.resx">
       <DependentUpon>ReportInventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportPenjualan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportPenjualan.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SalesmanCatalog.resx">
       <DependentUpon>SalesmanCatalog.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,10 +283,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SupervisorAdd.resx">
       <DependentUpon>SupervisorAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SupervisorReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SupervisorReport.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
