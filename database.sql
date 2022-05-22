@@ -30,6 +30,7 @@ CREATE TABLE `absen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `absen` */
+insert into absen (AB_ID, AB_US_ID, AB_DATE) values (1, 10, now());
 
 /*Table structure for table `day` */
 
@@ -249,8 +250,10 @@ CREATE TABLE `visit` (
   PRIMARY KEY (`V_ID`),
   KEY `V_US_ID` (`V_US_ID`),
   KEY `V_TOKO_ID` (`V_TOKO_ID`),
+  KEY `V_DA_ID` (`V_DA_ID`),
   CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`V_US_ID`) REFERENCES `user` (`US_ID`),
-  CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`V_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`)
+  CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`V_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`),
+  constraint `visit_ibfk_3` foreign key (V_DA_ID) references day (DA_ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `timestamp_stok`;
@@ -266,6 +269,9 @@ CREATE TABLE `timestamp_stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `visit` */
+insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (1,1,1,0,2);
+insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (2,2,2,0,6);
+insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (3,3,3,0,7);
 
 /* Function  structure for function  `generateIDDtrans` */
 

@@ -25,8 +25,6 @@ namespace toko_cat
         private void Supervisor_Load(object sender, EventArgs e)
         {
             loadDataGrid();
-            radioButton1.Enabled = false;
-            radioButton2.Enabled = false;
         }
 
         private void loadDataGrid()
@@ -42,9 +40,17 @@ namespace toko_cat
 
             cmd.Connection = conn;
 
-            cmd.CommandText = @"select V_ID as 'ID Visit', date_format(v.V_TANGGAL, '%W, %d %M %Y') as 'Jadwal Visit', t.TOKO_NAME as 'Toko Tujuan', u.US_NAME as 'Nama Sales', if(v.V_STATUS = 0, 'Belum dikunjungi', 'Sudah dikunjungi') as Status from visit v
-                join toko t on t.TOKO_ID = v.V_TOKO_ID
-                join user u on u.US_ID = v.V_US_ID";
+            cmd.CommandText = @"SELECT V_ID        AS 'ID Kunjungan',
+                                       t.TOKO_NAME AS 'Toko Tujuan',
+                                       d.DA_NAME   AS 'Hari Visit',
+                                       u.US_NAME   AS 'Nama Sales',
+                                       IF(generateCountAbsen(u.US_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
+                                FROM visit v
+                                         LEFT JOIN USER u ON u.US_ID = v.V_US_ID
+                                         LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
+                                         LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
+                                         LEFT JOIN absen a ON u.US_ID = a.AB_US_ID
+                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');";
             conn.Open();
             cmd.ExecuteReader();
             conn.Close();
@@ -69,66 +75,45 @@ namespace toko_cat
             loadDataGrid();
         }
 
-
-        private int id = -1;
-        private void dgvSupervisor_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            id = Convert.ToInt32(dgvSupervisor.Rows[e.RowIndex].Cells[0].Value);
-            string status = dgvSupervisor.Rows[e.RowIndex].Cells["Status"].Value.ToString();
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
-            
-            if (status == "Belum dikunjungi")
-            {
-                radioButton2.Checked = true;
-            }
-            else
-            {
-                radioButton1.Checked = true;
-            }
-        }
-
-        private void gantiStatus()
-        {
-            if (conn.State == ConnectionState.Open)
-            {
-                conn.Close();
-            }
-
-            int status = radioButton1.Checked ? 1 : 0;
-
-            try
-            {
-                cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "update visit set V_STATUS = @status where V_ID = @id;";
-                cmd.Parameters.Add(new MySqlParameter("@id", id));
-                cmd.Parameters.Add(new MySqlParameter("@status", status));
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show(excep.Message);
-            }
-            loadDataGrid();
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            gantiStatus();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            gantiStatus();
-        }
-
         private void tambahKomentarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalesStatus status = new SalesStatus();
             status.ShowDialog();
+        }
+
+        private void dgvSupervisor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //int idDGV = e.RowIndex;
+            //MySqlCommand cmd;
+            //var conn = Connection.Conn;
+            //int id = Convert.ToInt32(dgvSupervisor.Rows[idDGV].Cells[0].Value);
+
+            //if (conn.State == ConnectionState.Open)
+            //{
+            //    conn.Close();
+            //}
+            
+            //try
+            //{
+            //    cmd = new MySqlCommand();
+            //    cmd.Connection = conn;
+            //    cmd.CommandText = "update visit set V_TOKO_ID = @tokoid, V_DA_ID = @day, V_US_ID = @userid where V_ID = @id;";
+            //    cmd.Parameters.Add(new MySqlParameter("@id", id));
+            //    cmd.Parameters.Add(new MySqlParameter("@tokoid", idToko));
+            //    cmd.Parameters.Add(new MySqlParameter("@day", tujuan));
+            //    cmd.Parameters.Add(new MySqlParameter("@userid", idSales));
+
+            //    conn.Open();
+            //    cmd.ExecuteNonQuery();
+            //    conn.Close();
+
+            //    MessageBox.Show("Berhasil Diubah!");
+            //    clear();
+            //}
+            //catch (Exception excep)
+            //{
+            //    MessageBox.Show(excep.Message);
+            //}
         }
     }
 }

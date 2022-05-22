@@ -159,7 +159,7 @@ namespace toko_cat
 	                            DECLARE banyakAbsen INT;
 	
 	                            SELECT COUNT(*) INTO banyakAbsen FROM absen 
-	                            WHERE ab_us_id = id_user AND DATE(ab_date) = DATE(NOW());
+	                            WHERE ab_us_id = idUser AND DATE(ab_date) = DATE(NOW());
 	
 	                            RETURN banyakAbsen;
                                 END$$";
@@ -236,6 +236,26 @@ namespace toko_cat
                 form.ShowDialog();
                 form.Dispose();
                 this.Show();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)96)
+            {
+                textBox1.Text = "user1";
+                textBox2.Text = "user1";
+                button1.PerformClick();
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)96)
+            {
+                textBox1.Text = "user1";
+                textBox2.Text = "user1";
+                button1.PerformClick();
             }
         }
     }
