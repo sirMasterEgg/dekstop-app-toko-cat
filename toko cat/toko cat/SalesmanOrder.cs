@@ -60,6 +60,8 @@ namespace toko_cat
 
             idxBarangDipilih = -1;
             idxBarangOrderDipilih = -1;
+
+            tambahBarang.Enabled = false;
         }
 
         private void clearTambahBelanja()
@@ -260,6 +262,8 @@ namespace toko_cat
                             loadDgvBelanja();
 
                             clearTambahBelanja();
+
+                            clearTambah();
                         }
                         else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
                     }
@@ -276,6 +280,8 @@ namespace toko_cat
                             loadDgvBelanja();
 
                             clearTambahBelanja();
+
+                            clearTambah();
                         }
                         else MessageBox.Show("Jumlah Barang Tidak Boleh Melebihi Stok !");
                     }
@@ -380,6 +386,8 @@ namespace toko_cat
 
                     loadGenerateInvoice();
                     kosongkanData();
+
+                    MessageBox.Show("Order Berhasil !");
                 }
                 catch (MySqlException ex)
                 {

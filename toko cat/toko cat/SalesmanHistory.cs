@@ -20,6 +20,7 @@ namespace toko_cat
             InitializeComponent();
             loadDgvHtrans();
             updateDescription();
+            enableButton();
         }
 
         private void loadDgvHtrans()
@@ -35,7 +36,7 @@ namespace toko_cat
                                 END) AS 'Status'
                                 FROM htrans_item
                                 JOIN toko ON toko_id = ht_to_id
-                                WHERE ht_us_id = "+Form1.idUserLogin;
+                                WHERE ht_us_id = "+Form1.idUserLogin+" ORDER BY ht_invoice_number";
 
             dtHtrans = Connection.executeAdapter(cmd);
 
@@ -132,8 +133,26 @@ namespace toko_cat
         private void dgvHtrans_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             idxHtrans = e.RowIndex;
+            enableButton();
 
             updateDescription();
+        }
+
+        private void enableButton()
+        {
+            if (idxHtrans != -1)
+            {
+                btnInvoice.Enabled = true;
+            }
+            else btnInvoice.Enabled = false;
+        }
+
+        private void btnInvoice_Click(object sender, EventArgs e)
+        {
+            FormInvoice newForm = new FormInvoice(invoice.Text);
+            newForm.StartPosition = FormStartPosition.CenterScreen;
+
+            newForm.ShowDialog();
         }
     }
 }

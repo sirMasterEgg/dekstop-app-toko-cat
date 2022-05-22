@@ -35,17 +35,18 @@ namespace toko_cat
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvHtrans = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.invoice = new System.Windows.Forms.Label();
-            this.total = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.namaToko = new System.Windows.Forms.Label();
-            this.dgvBarang = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tglTrans = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tglTrans = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvBarang = new System.Windows.Forms.DataGridView();
+            this.namaToko = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.invoice = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.total = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnInvoice = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHtrans)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -96,7 +97,7 @@ namespace toko_cat
             this.dgvHtrans.Name = "dgvHtrans";
             this.dgvHtrans.ReadOnly = true;
             this.dgvHtrans.RowHeadersVisible = false;
-            this.dgvHtrans.Size = new System.Drawing.Size(427, 410);
+            this.dgvHtrans.Size = new System.Drawing.Size(427, 372);
             this.dgvHtrans.TabIndex = 3;
             this.dgvHtrans.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHtrans_CellContentDoubleClick);
             // 
@@ -120,89 +121,15 @@ namespace toko_cat
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detail Transaksi";
             // 
-            // invoice
+            // tglTrans
             // 
-            this.invoice.AutoSize = true;
-            this.invoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoice.Location = new System.Drawing.Point(127, 60);
-            this.invoice.Name = "invoice";
-            this.invoice.Size = new System.Drawing.Size(13, 16);
-            this.invoice.TabIndex = 21;
-            this.invoice.Text = "-";
-            // 
-            // total
-            // 
-            this.total.AutoSize = true;
-            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total.Location = new System.Drawing.Point(269, 121);
-            this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(13, 16);
-            this.total.TabIndex = 20;
-            this.total.Text = "-";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(208, 121);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 16);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Total :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(17, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 16);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Nomor Invoice : ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 16);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Toko :";
-            // 
-            // namaToko
-            // 
-            this.namaToko.AutoSize = true;
-            this.namaToko.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaToko.Location = new System.Drawing.Point(78, 27);
-            this.namaToko.Name = "namaToko";
-            this.namaToko.Size = new System.Drawing.Size(13, 16);
-            this.namaToko.TabIndex = 22;
-            this.namaToko.Text = "-";
-            // 
-            // dgvBarang
-            // 
-            this.dgvBarang.AllowUserToAddRows = false;
-            this.dgvBarang.AllowUserToDeleteRows = false;
-            this.dgvBarang.AllowUserToResizeColumns = false;
-            this.dgvBarang.AllowUserToResizeRows = false;
-            this.dgvBarang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBarang.Location = new System.Drawing.Point(21, 145);
-            this.dgvBarang.Name = "dgvBarang";
-            this.dgvBarang.ReadOnly = true;
-            this.dgvBarang.RowHeadersVisible = false;
-            this.dgvBarang.Size = new System.Drawing.Size(321, 251);
-            this.dgvBarang.TabIndex = 23;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 121);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "List Barang : ";
+            this.tglTrans.AutoSize = true;
+            this.tglTrans.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tglTrans.Location = new System.Drawing.Point(254, 25);
+            this.tglTrans.Name = "tglTrans";
+            this.tglTrans.Size = new System.Drawing.Size(13, 16);
+            this.tglTrans.TabIndex = 28;
+            this.tglTrans.Text = "-";
             // 
             // status
             // 
@@ -224,21 +151,107 @@ namespace toko_cat
             this.label5.TabIndex = 25;
             this.label5.Text = "Status :";
             // 
-            // tglTrans
+            // label1
             // 
-            this.tglTrans.AutoSize = true;
-            this.tglTrans.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tglTrans.Location = new System.Drawing.Point(254, 25);
-            this.tglTrans.Name = "tglTrans";
-            this.tglTrans.Size = new System.Drawing.Size(13, 16);
-            this.tglTrans.TabIndex = 28;
-            this.tglTrans.Text = "-";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 121);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "List Barang : ";
+            // 
+            // dgvBarang
+            // 
+            this.dgvBarang.AllowUserToAddRows = false;
+            this.dgvBarang.AllowUserToDeleteRows = false;
+            this.dgvBarang.AllowUserToResizeColumns = false;
+            this.dgvBarang.AllowUserToResizeRows = false;
+            this.dgvBarang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBarang.Location = new System.Drawing.Point(21, 145);
+            this.dgvBarang.Name = "dgvBarang";
+            this.dgvBarang.ReadOnly = true;
+            this.dgvBarang.RowHeadersVisible = false;
+            this.dgvBarang.Size = new System.Drawing.Size(321, 251);
+            this.dgvBarang.TabIndex = 23;
+            // 
+            // namaToko
+            // 
+            this.namaToko.AutoSize = true;
+            this.namaToko.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.namaToko.Location = new System.Drawing.Point(78, 27);
+            this.namaToko.Name = "namaToko";
+            this.namaToko.Size = new System.Drawing.Size(13, 16);
+            this.namaToko.TabIndex = 22;
+            this.namaToko.Text = "-";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(17, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 16);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Toko :";
+            // 
+            // invoice
+            // 
+            this.invoice.AutoSize = true;
+            this.invoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoice.Location = new System.Drawing.Point(127, 60);
+            this.invoice.Name = "invoice";
+            this.invoice.Size = new System.Drawing.Size(13, 16);
+            this.invoice.TabIndex = 21;
+            this.invoice.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(17, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 16);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Nomor Invoice : ";
+            // 
+            // total
+            // 
+            this.total.AutoSize = true;
+            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total.Location = new System.Drawing.Point(269, 121);
+            this.total.Name = "total";
+            this.total.Size = new System.Drawing.Size(13, 16);
+            this.total.TabIndex = 20;
+            this.total.Text = "-";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(208, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 16);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Total :";
+            // 
+            // btnInvoice
+            // 
+            this.btnInvoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInvoice.Location = new System.Drawing.Point(163, 407);
+            this.btnInvoice.Name = "btnInvoice";
+            this.btnInvoice.Size = new System.Drawing.Size(120, 31);
+            this.btnInvoice.TabIndex = 29;
+            this.btnInvoice.Text = "Lihat Invoice";
+            this.btnInvoice.UseVisualStyleBackColor = true;
+            this.btnInvoice.Click += new System.EventHandler(this.btnInvoice_Click);
             // 
             // SalesmanHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 450);
+            this.Controls.Add(this.btnInvoice);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvHtrans);
             this.Controls.Add(this.menuStrip1);
@@ -276,5 +289,6 @@ namespace toko_cat
         private System.Windows.Forms.Label tglTrans;
         private System.Windows.Forms.Label status;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnInvoice;
     }
 }
