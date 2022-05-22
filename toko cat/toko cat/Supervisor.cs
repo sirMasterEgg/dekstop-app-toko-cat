@@ -153,7 +153,9 @@ namespace toko_cat
 
         private void reportToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            SupervisorReportForm newForm = new SupervisorReportForm();
+            newForm.ShowDialog();
+            newForm.Dispose();
         }
     }
 }
