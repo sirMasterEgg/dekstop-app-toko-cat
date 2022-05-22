@@ -150,5 +150,10 @@ namespace toko_cat
             conn.Close();
             return (lastId == "") ? 1 : Int32.Parse(lastId) + 1;
         }
+
+        private void reportToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
