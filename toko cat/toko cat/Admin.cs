@@ -13,9 +13,9 @@ namespace toko_cat
 {
     public partial class Admin : Form
     {
-        DataTable dtOrders, dtOrderDetails, dtHistory;
+        DataTable dtOrders, dtOrderDetails, dtHistory, dtHistoryDetails, dtItems;
         MySqlDataAdapter da;
-        int orderIndex, detailIndex;
+        int orderIndex, detailIndex, historyIndex, itemIndex;
         public Admin()
         {
             InitializeComponent();
@@ -26,6 +26,35 @@ namespace toko_cat
         {
             loadOrders();
             loadHistory();
+            itemTabReset();
+        }
+
+        private void itemTabReset()
+        {
+            loadItems();
+            int id = dtItems.Rows.Count + 1;
+            textBox1.Text = id.ToString();
+            textBox2.Text = "";
+            textBox4.Text = "";
+            comboBox1.SelectedIndex = 0;
+            button6.Enabled = true;
+            button7.Enabled = false;
+            button8.Enabled = false;
+        }
+
+        private void loadItems()
+        {
+            dtItems = new DataTable();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT IT_ID AS 'ID', IT_NAME AS 'Nama Item', IT_PRICE AS 'Harga Item', IT_STOCK AS 'Stok Item', if(IT_STATUS = 1, 'Aktif', 'Non-aktif') AS 'Status' FROM item";
+
+            Connection.executeNonQuery(cmd);
+
+            da.SelectCommand = cmd;
+            da.Fill(dtItems);
+
+            dataGridView3.DataSource = dtItems;
         }
 
         private void loadOrders()
@@ -109,7 +138,16 @@ namespace toko_cat
 
         private void button8_Click(object sender, EventArgs e)
         {
+            Connection.Conn.Open();
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM item WHERE IT_ID = @id", Connection.Conn);
 
+            cmd.Parameters.AddWithValue("@id", textBox1.Text);
+
+            cmd.ExecuteNonQuery();
+            Connection.Conn.Close();
+            MessageBox.Show("Item telah dinon-aktifkan");
+
+            itemTabReset();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -143,6 +181,9 @@ namespace toko_cat
 
                 button1.Enabled = false;
                 button2.Enabled = false;
+
+                dtOrderDetails.Clear();
+                dataGridView2.DataSource = dtOrderDetails;
             }
         }
 
@@ -161,20 +202,93 @@ namespace toko_cat
 
                 button1.Enabled = false;
                 button2.Enabled = false;
+
+                dtOrderDetails.Clear();
+                dataGridView2.DataSource = dtOrderDetails;
             }
+        }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            textBox1.Text = dtItems.Rows[index][0].ToString();
+            textBox2.Text = dtItems.Rows[index][1].ToString();
+            textBox4.Text = dtItems.Rows[index][2].ToString();
+            comboBox1.Text = dtItems.Rows[index][4].ToString();
+            button6.Enabled = false;
+            button7.Enabled = true;
+            button8.Enabled = true;
+            itemIndex = index+1;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            itemTabReset();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Connection.Conn.Open();
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO item(IT_ID, IT_NAME, IT_PRICE, IT_STOCK, IT_STATUS) VALUES(@id, @nama, @harga, 0, @status)", Connection.Conn);
+
+            cmd.Parameters.AddWithValue("@id", itemIndex);
+            cmd.Parameters.AddWithValue("@nama", textBox2.Text);
+            cmd.Parameters.AddWithValue("@harga", textBox4.Text);
+            cmd.Parameters.AddWithValue("@status", comboBox1.SelectedIndex);
+            
+            cmd.ExecuteNonQuery();
+            Connection.Conn.Close();
+            MessageBox.Show("Item telah ditambahkan");
+
+            itemTabReset();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Connection.Conn.Open();
+            MySqlCommand cmd = new MySqlCommand("UPDATE item SET IT_NAME = @nama, IT_PRICE = @harga, IT_STATUS = @status where IT_ID = @id", Connection.Conn);
+
+            cmd.Parameters.AddWithValue("@id", itemIndex);
+            cmd.Parameters.AddWithValue("@nama", textBox2.Text);
+            cmd.Parameters.AddWithValue("@harga", textBox4.Text);
+            cmd.Parameters.AddWithValue("@status", comboBox1.SelectedIndex);
+
+            cmd.ExecuteNonQuery();
+            Connection.Conn.Close();
+            MessageBox.Show("Item telah diupdate");
+
+            itemTabReset();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             numericUpDown1.Value = Convert.ToInt32(dtOrderDetails.Rows[e.RowIndex][2]);
             detailIndex = Convert.ToInt32(dtOrderDetails.Rows[e.RowIndex][0]);
+
+            button3.Enabled = true;
+            button5.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            AdminAddOrderItem form = new AdminAddOrderItem();
+            AdminAddOrderItem form = new AdminAddOrderItem(orderIndex);
             form.ShowDialog();
             loadOrderDetails(orderIndex);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Connection.Conn.Open();
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM dtrans_item WHERE DT_ID = @id", Connection.Conn);
+            cmd.Parameters.AddWithValue("@id", detailIndex);
+            cmd.ExecuteNonQuery();
+            Connection.Conn.Close();
+            loadOrderDetails(orderIndex);
+
+            MessageBox.Show("Item telah di remove");
+
+            button3.Enabled = false;
+            button5.Enabled = false;
         }
 
         private void loadHistory()
@@ -191,9 +305,33 @@ namespace toko_cat
             dataGridView4.DataSource = dtHistory;
         }
 
+        private void loadHistoryDetails()
+        {
+            dtHistoryDetails = new DataTable();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT d.DT_ID AS 'ID', i.IT_NAME AS 'Item', d.DT_AMOUNT AS 'Jumlah', i.IT_STOCK AS 'Stok' FROM dtrans_item d JOIN item i ON i.IT_ID = d.DT_IT_ID WHERE d.DT_HT_ID = " + historyIndex;
+
+            Connection.executeNonQuery(cmd);
+
+            da.SelectCommand = cmd;
+            da.Fill(dtHistoryDetails);
+            dataGridView5.DataSource = dtHistoryDetails;
+            dataGridView5.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
         private void dataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT HT_ID FROM htrans_item WHERE HT_INVOICE_NUMBER = " + dtHistory.Rows[e.RowIndex][0].ToString();
+
+            MySqlDataReader reader = Connection.executeReader(cmd);
+
+            reader.Read();
+            int index = reader.GetInt32(0);
+            loadOrderDetails(index);
+            historyIndex = index;
+            loadHistoryDetails();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -206,7 +344,9 @@ namespace toko_cat
             Connection.Conn.Close();
             loadOrderDetails(orderIndex);
 
-            MessageBox.Show("Stok item telah di Update");
+            MessageBox.Show("Jumlah item telah di Update");
+            button3.Enabled = false;
+            button5.Enabled = false;
         }
     }
 }
