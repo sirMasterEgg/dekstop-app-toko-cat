@@ -61,6 +61,13 @@ namespace toko_cat
                 cmdTimeStamp.Parameters.AddWithValue("@b", dt.Rows[i][1].ToString());
 
                 Connection.executeNonQuery(cmdTimeStamp);
+
+                MySqlCommand cmdUpdate = new MySqlCommand();
+                cmdUpdate.CommandText = "UPDATE item SET it_stock = it_stock - @a WHERE it_id = @b";
+                cmdUpdate.Parameters.AddWithValue("@a", dt.Rows[i][1].ToString());
+                cmdUpdate.Parameters.AddWithValue("@b", dt.Rows[i][0].ToString());
+
+                Connection.executeNonQuery(cmdUpdate);
             }
 
             MySqlCommand cmd = new MySqlCommand("update htrans_item set HT_STATUS = 3 where HT_ID = @htid");
