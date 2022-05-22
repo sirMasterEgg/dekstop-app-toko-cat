@@ -8,6 +8,7 @@ namespace toko_cat
     public partial class InventoryDelivery : Form
     {
         private int index;
+        private int stokSebelum = -1;
 
         public InventoryDelivery()
         {
@@ -48,7 +49,8 @@ namespace toko_cat
             {
                 numericUpDown1.Enabled = true;
                 button1.Enabled = true;
-                numericUpDown1.Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
+                stokSebelum = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
+                numericUpDown1.Value = stokSebelum;
                 index = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
             }
         }
@@ -61,6 +63,12 @@ namespace toko_cat
             cmd.Parameters.AddWithValue("@itid", index);
             cmd.ExecuteNonQuery();
             Connection.Conn.Close();
+
+            MySqlCommand cmdTimeStamp = new MySqlCommand("INSERT INTO timestamp_stok(TS_IT_ID, TS_DATE, TS_VALUE, TS_STATUS) VALUES (@a, NOW(), @b, 1)");
+            cmdTimeStamp.Parameters.AddWithValue("@a", index);
+            cmdTimeStamp.Parameters.AddWithValue("@b", numericUpDown1.Value - stokSebelum);
+            Connection.executeNonQuery(cmdTimeStamp);
+
             this.OnLoad(e);
         }
     }

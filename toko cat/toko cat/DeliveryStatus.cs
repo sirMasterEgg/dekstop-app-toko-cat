@@ -49,11 +49,24 @@ namespace toko_cat
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Connection.Conn.Open();
-            MySqlCommand cmd = new MySqlCommand("update htrans_item set HT_STATUS = 3 where HT_ID = @htid", Connection.Conn);
+            MySqlCommand cmdDtrans = new MySqlCommand();
+            cmdDtrans.CommandText = "SELECT dt_it_id, dt_amount FROM dtrans_item WHERE dt_ht_id = "+index;
+
+            DataTable dt = Connection.executeAdapter(cmdDtrans);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                MySqlCommand cmdTimeStamp = new MySqlCommand("INSERT INTO timestamp_stok(TS_IT_ID, TS_DATE, TS_VALUE, TS_STATUS) VALUES (@a, NOW(), @b, 2)");
+                cmdTimeStamp.Parameters.AddWithValue("@a", dt.Rows[i][0].ToString());
+                cmdTimeStamp.Parameters.AddWithValue("@b", dt.Rows[i][1].ToString());
+
+                Connection.executeNonQuery(cmdTimeStamp);
+            }
+
+            MySqlCommand cmd = new MySqlCommand("update htrans_item set HT_STATUS = 3 where HT_ID = @htid");
             cmd.Parameters.AddWithValue("@htid", index);
-            cmd.ExecuteNonQuery();
-            Connection.Conn.Close();
+            Connection.executeNonQuery(cmd);
+
             this.OnLoad(e);
         }
     }

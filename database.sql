@@ -253,6 +253,18 @@ CREATE TABLE `visit` (
   CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`V_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `timestamp_stok`;
+
+CREATE TABLE `timestamp_stok` (
+	`TS_ID` int(11) NOT NULL AUTO_INCREMENT,
+	`TS_IT_ID` int(11) NOT NULL,
+	`TS_VALUE` int(11) NOT NULL,
+	`TS_DATE` datetime NOT NULL DEFAULT current_timestamp(),
+	`TS_STATUS` int(10) NOT NULL,
+	PRIMARY KEY (`TS_ID`),
+	CONSTRAINT 	`timestamp_stok_ibfk_1` FOREIGN KEY (`TS_IT_ID`) REFERENCES item (`IT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 /*Data for the table `visit` */
 
 /* Function  structure for function  `generateIDDtrans` */

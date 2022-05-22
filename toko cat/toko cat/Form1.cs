@@ -142,6 +142,36 @@ namespace toko_cat
             }
         }
 
+        private void generateFunctionCountAbsen()
+        {
+            try
+            {
+                Connection.openConn();
+
+                MySqlScript script = new MySqlScript(Connection.Conn);
+
+                script.Query = @"CREATE OR REPLACE
+                                FUNCTION `db_toko_cat`.`generateCountAbsen`(
+	                            idUser INT(11)
+                                )
+                                RETURNS INT
+                                BEGIN
+	                            DECLARE banyakAbsen INT;
+	
+	                            SELECT COUNT(*) INTO banyakAbsen FROM absen 
+	                            WHERE ab_us_id = id_user AND DATE(ab_date) = DATE(NOW());
+	
+	                            RETURN banyakAbsen;
+                                END$$";
+                script.Delimiter = @"$$";
+                script.Execute();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable("user");
@@ -157,6 +187,7 @@ namespace toko_cat
             }
             if (dt.Rows[0]["US_TY_ID"].ToString() == "1") // Sales Supervisor
             {
+                generateFunctionCountAbsen();
                 this.Hide();
                 Form form = new Supervisor();
                 form.ShowDialog();
