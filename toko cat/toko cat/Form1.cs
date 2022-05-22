@@ -172,6 +172,33 @@ namespace toko_cat
             }
         }
 
+        private void generateFuntionDTSubtotal()
+        {
+            try
+            {
+                Connection.openConn();
+
+                MySqlScript script = new MySqlScript(Connection.Conn);
+
+                script.Query = @"CREATE OR REPLACE
+                                FUNCTION `db_toko_cat`.`getDTSubtotal`(id INT, amount INT)
+                                RETURNS INT(11)
+    
+                                BEGIN
+	                            DECLARE res INT DEFAULT 0;
+	                            SELECT IT_PRICE INTO res FROM item WHERE IT_ID = id;
+	                            SET res = res * amount;
+	                            RETURN res;
+                                END$$";
+                script.Delimiter = @"$$";
+                script.Execute();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable("user");
@@ -215,6 +242,7 @@ namespace toko_cat
             }
             else if (dt.Rows[0]["US_TY_ID"].ToString() == "3") // Admin
             {
+                generateFuntionDTSubtotal();
                 this.Hide();
                 Form form = new Admin();
                 form.ShowDialog();

@@ -51,7 +51,6 @@ namespace toko_cat
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@ namespace toko_cat
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -138,6 +138,7 @@ namespace toko_cat
             this.button5.TabIndex = 6;
             this.button5.Text = "Remove";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -237,7 +238,7 @@ namespace toko_cat
             this.groupBox4.Size = new System.Drawing.Size(401, 432);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Detail";
             // 
             // dataGridView5
             // 
@@ -260,7 +261,7 @@ namespace toko_cat
             this.groupBox3.Size = new System.Drawing.Size(405, 439);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Transaksi";
             // 
             // dataGridView4
             // 
@@ -278,11 +279,11 @@ namespace toko_cat
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.comboBox1);
             this.tabPage3.Controls.Add(this.button9);
             this.tabPage3.Controls.Add(this.button8);
             this.tabPage3.Controls.Add(this.button7);
             this.tabPage3.Controls.Add(this.button6);
-            this.tabPage3.Controls.Add(this.textBox3);
             this.tabPage3.Controls.Add(this.textBox4);
             this.tabPage3.Controls.Add(this.textBox2);
             this.tabPage3.Controls.Add(this.textBox1);
@@ -300,16 +301,18 @@ namespace toko_cat
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(604, 389);
+            this.button9.Location = new System.Drawing.Point(735, 409);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 12;
             this.button9.Text = "Clear";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(604, 347);
+            this.button8.Enabled = false;
+            this.button8.Location = new System.Drawing.Point(735, 383);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 11;
@@ -319,33 +322,28 @@ namespace toko_cat
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(500, 389);
+            this.button7.Enabled = false;
+            this.button7.Location = new System.Drawing.Point(654, 409);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 10;
             this.button7.Text = "Update";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(500, 347);
+            this.button6.Location = new System.Drawing.Point(654, 383);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 9;
             this.button6.Text = "Insert";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(137, 406);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(218, 20);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(137, 380);
+            this.textBox4.Location = new System.Drawing.Point(410, 386);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(218, 20);
             this.textBox4.TabIndex = 7;
@@ -353,7 +351,7 @@ namespace toko_cat
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(137, 354);
+            this.textBox2.Location = new System.Drawing.Point(99, 411);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(218, 20);
             this.textBox2.TabIndex = 6;
@@ -361,8 +359,10 @@ namespace toko_cat
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(137, 328);
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(99, 385);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(218, 20);
             this.textBox1.TabIndex = 5;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -370,7 +370,7 @@ namespace toko_cat
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 409);
+            this.label4.Location = new System.Drawing.Point(333, 415);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 4;
@@ -380,7 +380,7 @@ namespace toko_cat
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 383);
+            this.label3.Location = new System.Drawing.Point(333, 389);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 3;
@@ -389,17 +389,22 @@ namespace toko_cat
             // 
             // dataGridView3
             // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
             this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(7, 12);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(806, 298);
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView3.Size = new System.Drawing.Size(806, 355);
             this.dataGridView3.TabIndex = 0;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 357);
+            this.label2.Location = new System.Drawing.Point(23, 414);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 2;
@@ -409,12 +414,23 @@ namespace toko_cat
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 331);
+            this.label1.Location = new System.Drawing.Point(23, 388);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "ID Item:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Non-aktif",
+            "Aktif"});
+            this.comboBox1.Location = new System.Drawing.Point(410, 411);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(218, 21);
+            this.comboBox1.TabIndex = 13;
             // 
             // Admin
             // 
@@ -465,7 +481,6 @@ namespace toko_cat
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
@@ -477,5 +492,6 @@ namespace toko_cat
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
