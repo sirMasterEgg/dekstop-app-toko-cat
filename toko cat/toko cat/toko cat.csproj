@@ -300,10 +300,6 @@
     <EmbeddedResource Include="SupervisorAdd.resx">
       <DependentUpon>SupervisorAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SupervisorReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SupervisorReport2.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="SupervisorReportForm.resx">
       <DependentUpon>SupervisorReportForm.cs</DependentUpon>
     </EmbeddedResource>
