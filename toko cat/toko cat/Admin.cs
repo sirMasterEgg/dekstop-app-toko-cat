@@ -16,6 +16,7 @@ namespace toko_cat
         DataTable dtOrders, dtOrderDetails, dtHistory, dtHistoryDetails, dtItems;
         MySqlDataAdapter da;
         int orderIndex, detailIndex, historyIndex, itemIndex;
+        int idxPilihToko = -1;
         public Admin()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace toko_cat
         {
             loadOrders();
             loadHistory();
+            loadToko();
             itemTabReset();
         }
 
@@ -281,34 +283,37 @@ namespace toko_cat
 
         private void button10_Click(object sender, EventArgs e)
         {
-            MySqlCommand cmd;
-            var conn = Connection.Conn;
-            int id = hitungTokoID();
-
-            if (conn.State == ConnectionState.Open)
+            if (btnae.Text == "Add")
             {
-                conn.Close();
-            }
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "insert into toko (TOKO_NAME, TOKO_ALAMAT, TOKO_PHONE) values (@a, @b, @c);";
+                cmd.Parameters.AddWithValue("@a", namatoko.Text);
+                cmd.Parameters.AddWithValue("@b", alamattoko.Text);
+                cmd.Parameters.AddWithValue("@c", telptoko.Text);
 
-            try
+                Connection.executeNonQuery(cmd);
+
+                idxPilihToko = -1;
+                kosongkanData();
+                updateButton();
+            }
+            else
             {
-                cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "insert into toko (TOKO_ID, TOKO_NAME) values (@id, @name);";
-                cmd.Parameters.Add(new MySqlParameter("@id", id));
-                cmd.Parameters.Add(new MySqlParameter("@name", textBox3.Text));
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "update toko set toko_name = @a, toko_alamat = @b, toko_phone = @c where toko_id = @d";
+                cmd.Parameters.AddWithValue("@a", namatoko.Text);
+                cmd.Parameters.AddWithValue("@b", alamattoko.Text);
+                cmd.Parameters.AddWithValue("@c", telptoko.Text);
+                cmd.Parameters.AddWithValue("@d", dataGridView6[0, idxPilihToko].Value.ToString());
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                Connection.executeNonQuery(cmd);
 
-                MessageBox.Show("Berhasil Ditambahkan!");
-                this.Close();
+                idxPilihToko = -1;
+                kosongkanData();
+                updateButton();
+
             }
-            catch (Exception excep)
-            {
-                MessageBox.Show(excep.Message);
-            }
+            loadToko();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -318,6 +323,96 @@ namespace toko_cat
 
             button3.Enabled = true;
             button5.Enabled = true;
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView6_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            idxPilihToko = e.RowIndex;
+            isiData();
+            updateButton();
+        }
+
+        private void kosongkanData()
+        {
+            namatoko.Text = "";
+            alamattoko.Text = "";
+            telptoko.Text = "";
+        }
+
+        private void isiData()
+        {
+            if (idxPilihToko != -1)
+            {
+                namatoko.Text = dataGridView6[1, idxPilihToko].Value.ToString();
+                alamattoko.Text = dataGridView6[2, idxPilihToko].Value.ToString();
+                telptoko.Text = dataGridView6[3, idxPilihToko].Value.ToString();
+            }
+        }
+
+        private void cekEnableButton()
+        {
+            if (namatoko.Text != "" || telptoko.Text != "" || alamattoko.Text != "")
+            {
+                btnae.Enabled = true;
+            }
+            else
+            {
+                btnae.Enabled = false;
+            }
+
+            if (idxPilihToko != -1) btndel.Enabled = true;
+            else btndel.Enabled = false;
+        }
+
+        private void updateButton()
+        {
+            if (idxPilihToko == -1)
+            {
+                btnae.Text = "Add";
+            }
+            else
+            {
+                btnae.Text = "Edit";
+            }
+
+            cekEnableButton();
+        }
+
+        private void namatoko_TextChanged(object sender, EventArgs e)
+        {
+            cekEnableButton();
+        }
+
+        private void alamattoko_TextChanged(object sender, EventArgs e)
+        {
+            cekEnableButton();
+        }
+
+        private void telptoko_TextChanged(object sender, EventArgs e)
+        {
+            cekEnableButton();
+        }
+
+        private void btndel_Click(object sender, EventArgs e)
+        {
+            if (idxPilihToko != -1)
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "DELETE FROM toko WHERE toko_id = @a";
+                cmd.Parameters.AddWithValue("@a", dataGridView6[0, idxPilihToko].Value.ToString());
+
+                Connection.executeNonQuery(cmd);
+            }
+        }
+
+        private void dataGridView6_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -398,6 +493,20 @@ namespace toko_cat
             MessageBox.Show("Jumlah item telah di Update");
             button3.Enabled = false;
             button5.Enabled = false;
+        }
+
+        private void loadToko()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT toko_id AS 'ID', toko_name AS 'Nama Toko', toko_alamat AS 'Alamat', toko_phone AS 'No. Telp' FROM toko";
+
+            dataGridView6.DataSource = Connection.executeAdapter(cmd);
+
+            for (int i = 0; i < dataGridView6.Columns.Count; i++)
+            {
+                if (i == 1 || i == 2) dataGridView6.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                else dataGridView6.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
     }
 }

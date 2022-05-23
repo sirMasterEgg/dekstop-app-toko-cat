@@ -172,17 +172,19 @@ DROP TABLE IF EXISTS `toko`;
 CREATE TABLE `toko` (
   `TOKO_ID` int(11) NOT NULL AUTO_INCREMENT,
   `TOKO_NAME` varchar(500) NOT NULL,
+  `TOKO_ALAMAT` varchar(500) NOT NULL,
+  `TOKO_PHONE` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`TOKO_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `toko` */
 
-insert  into `toko`(`TOKO_ID`,`TOKO_NAME`) values 
-(1,'Toko Haha'),
-(2,'Toko Hehe'),
-(3,'Toko Hihi'),
-(4,'Toko Hoho'),
-(5,'Toko Huhu');
+insert  into `toko`(`TOKO_ID`,`TOKO_NAME`,`TOKO_ALAMAT`,`TOKO_PHONE`) values 
+(1,'Toko Haha', 'Jl. Toko 1', '0123456789'),
+(2,'Toko Hehe', 'Jl. Toko 2', '0123456789'),
+(3,'Toko Hihi', 'Jl. Toko 3', '0123456789'),
+(4,'Toko Hoho', 'Jl. Toko 4', '0123456789'),
+(5,'Toko Huhu', 'Jl. Toko 5', '0123456789');
 
 /*Table structure for table `type` */
 

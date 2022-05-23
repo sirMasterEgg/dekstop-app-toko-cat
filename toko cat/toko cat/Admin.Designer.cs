@@ -64,9 +64,15 @@ namespace toko_cat
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.ReportPenjualan1 = new toko_cat.ReportPenjualan();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button10 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.btnae = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.namatoko = new System.Windows.Forms.TextBox();
+            this.alamattoko = new System.Windows.Forms.TextBox();
+            this.telptoko = new System.Windows.Forms.TextBox();
+            this.btndel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -419,6 +425,7 @@ namespace toko_cat
             this.dataGridView3.Location = new System.Drawing.Point(7, 12);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView3.Size = new System.Drawing.Size(806, 355);
             this.dataGridView3.TabIndex = 0;
@@ -468,9 +475,15 @@ namespace toko_cat
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.btndel);
+            this.tabPage5.Controls.Add(this.telptoko);
+            this.tabPage5.Controls.Add(this.alamattoko);
+            this.tabPage5.Controls.Add(this.namatoko);
+            this.tabPage5.Controls.Add(this.label7);
+            this.tabPage5.Controls.Add(this.label6);
+            this.tabPage5.Controls.Add(this.label5);
             this.tabPage5.Controls.Add(this.dataGridView6);
-            this.tabPage5.Controls.Add(this.textBox3);
-            this.tabPage5.Controls.Add(this.button10);
+            this.tabPage5.Controls.Add(this.btnae);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(825, 445);
@@ -478,30 +491,94 @@ namespace toko_cat
             this.tabPage5.Text = "Toko";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(738, 415);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 0;
-            this.button10.Text = "Add";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(601, 417);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(131, 20);
-            this.textBox3.TabIndex = 1;
-            // 
             // dataGridView6
             // 
+            this.dataGridView6.AllowUserToAddRows = false;
+            this.dataGridView6.AllowUserToDeleteRows = false;
+            this.dataGridView6.AllowUserToResizeColumns = false;
+            this.dataGridView6.AllowUserToResizeRows = false;
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView6.Location = new System.Drawing.Point(7, 3);
             this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(815, 354);
+            this.dataGridView6.ReadOnly = true;
+            this.dataGridView6.RowHeadersVisible = false;
+            this.dataGridView6.Size = new System.Drawing.Size(815, 331);
             this.dataGridView6.TabIndex = 2;
+            this.dataGridView6.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellContentClick);
+            this.dataGridView6.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellContentDoubleClick);
+            // 
+            // btnae
+            // 
+            this.btnae.Location = new System.Drawing.Point(500, 377);
+            this.btnae.Name = "btnae";
+            this.btnae.Size = new System.Drawing.Size(75, 23);
+            this.btnae.TabIndex = 0;
+            this.btnae.Text = "Add";
+            this.btnae.UseVisualStyleBackColor = true;
+            this.btnae.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 350);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Nama Toko : ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 377);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Alamat Toko : ";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(348, 350);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "No.Telp Toko :";
+            // 
+            // namatoko
+            // 
+            this.namatoko.Location = new System.Drawing.Point(103, 347);
+            this.namatoko.Name = "namatoko";
+            this.namatoko.Size = new System.Drawing.Size(131, 20);
+            this.namatoko.TabIndex = 8;
+            this.namatoko.TextChanged += new System.EventHandler(this.namatoko_TextChanged);
+            // 
+            // alamattoko
+            // 
+            this.alamattoko.Location = new System.Drawing.Point(103, 377);
+            this.alamattoko.Multiline = true;
+            this.alamattoko.Name = "alamattoko";
+            this.alamattoko.Size = new System.Drawing.Size(355, 55);
+            this.alamattoko.TabIndex = 9;
+            this.alamattoko.TextChanged += new System.EventHandler(this.alamattoko_TextChanged);
+            // 
+            // telptoko
+            // 
+            this.telptoko.Location = new System.Drawing.Point(444, 347);
+            this.telptoko.Name = "telptoko";
+            this.telptoko.Size = new System.Drawing.Size(131, 20);
+            this.telptoko.TabIndex = 10;
+            this.telptoko.TextChanged += new System.EventHandler(this.telptoko_TextChanged);
+            // 
+            // btndel
+            // 
+            this.btndel.Location = new System.Drawing.Point(500, 406);
+            this.btndel.Name = "btndel";
+            this.btndel.Size = new System.Drawing.Size(75, 23);
+            this.btndel.TabIndex = 11;
+            this.btndel.Text = "Delete";
+            this.btndel.UseVisualStyleBackColor = true;
+            this.btndel.Click += new System.EventHandler(this.btndel_Click);
             // 
             // Admin
             // 
@@ -572,8 +649,14 @@ namespace toko_cat
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private ReportPenjualan ReportPenjualan1;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btnae;
         private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btndel;
+        private System.Windows.Forms.TextBox telptoko;
+        private System.Windows.Forms.TextBox alamattoko;
+        private System.Windows.Forms.TextBox namatoko;
+        private System.Windows.Forms.Label label7;
     }
 }
