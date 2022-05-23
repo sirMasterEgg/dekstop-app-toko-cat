@@ -78,6 +78,12 @@
       <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Barang.cs" />
+    <Compile Include="SupervisorRpt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupervisorRpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DeliveryReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,12 +207,6 @@
     <Compile Include="SupervisorAdd.Designer.cs">
       <DependentUpon>SupervisorAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="SupervisorReport1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SupervisorReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SupervisorReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +221,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminAddOrderItem.resx">
       <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupervisorRpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SupervisorRpt.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DeliveryReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -298,7 +302,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SupervisorReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SupervisorReport1.cs</LastGenOutput>
+      <LastGenOutput>SupervisorReport2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SupervisorReportForm.resx">
       <DependentUpon>SupervisorReportForm.cs</DependentUpon>

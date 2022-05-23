@@ -19,7 +19,7 @@ namespace toko_cat
 
         private void SupervisorReportForm_Load(object sender, EventArgs e)
         {
-            SupervisorReport report = new SupervisorReport();
+            SupervisorRpt report = new SupervisorRpt();
 
             crystalReportViewer1.ReportSource = report;
         }
