@@ -41,7 +41,26 @@ namespace toko_cat
             button7.Enabled = false;
             button8.Enabled = false;
         }
+        private int hitungTokoID()
+        {
+            var conn = Connection.Conn;
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
 
+            var cmd = new MySqlCommand();
+            cmd.Connection = conn;
+
+            conn.Open();
+
+            cmd.CommandText = "select max(TOKO_ID) from toko;";
+
+            string lastId = cmd.ExecuteScalar().ToString();
+
+            conn.Close();
+            return (lastId == "") ? 1 : Int32.Parse(lastId) + 1;
+        }
         private void loadItems()
         {
             dtItems = new DataTable();
@@ -220,7 +239,7 @@ namespace toko_cat
             button8.Enabled = true;
             itemIndex = index+1;
         }
-
+        
         private void button9_Click(object sender, EventArgs e)
         {
             itemTabReset();
@@ -258,6 +277,38 @@ namespace toko_cat
             MessageBox.Show("Item telah diupdate");
 
             itemTabReset();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            MySqlCommand cmd;
+            var conn = Connection.Conn;
+            int id = hitungTokoID();
+
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+
+            try
+            {
+                cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "insert into toko (TOKO_ID, TOKO_NAME) values (@id, @name);";
+                cmd.Parameters.Add(new MySqlParameter("@id", id));
+                cmd.Parameters.Add(new MySqlParameter("@name", textBox3.Text));
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                MessageBox.Show("Berhasil Ditambahkan!");
+                this.Close();
+            }
+            catch (Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
