@@ -47,6 +47,7 @@ namespace toko_cat
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -59,7 +60,9 @@ namespace toko_cat
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.ReportPenjualan1 = new toko_cat.ReportPenjualan();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -74,6 +77,7 @@ namespace toko_cat
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -97,6 +101,7 @@ namespace toko_cat
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(1, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -299,6 +304,17 @@ namespace toko_cat
             this.tabPage3.Text = "Items";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Non-aktif",
+            "Aktif"});
+            this.comboBox1.Location = new System.Drawing.Point(410, 411);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(218, 21);
+            this.comboBox1.TabIndex = 13;
+            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(735, 409);
@@ -421,16 +437,27 @@ namespace toko_cat
             this.label1.Text = "ID Item:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // comboBox1
+            // tabPage4
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Non-aktif",
-            "Aktif"});
-            this.comboBox1.Location = new System.Drawing.Point(410, 411);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(218, 21);
-            this.comboBox1.TabIndex = 13;
+            this.tabPage4.Controls.Add(this.crystalReportViewer1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(825, 445);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Report";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // crystalReportViewer1
+            // 
+            this.crystalReportViewer1.ActiveViewIndex = 0;
+            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.crystalReportViewer1.Name = "crystalReportViewer1";
+            this.crystalReportViewer1.ReportSource = this.ReportPenjualan1;
+            this.crystalReportViewer1.Size = new System.Drawing.Size(825, 445);
+            this.crystalReportViewer1.TabIndex = 0;
             // 
             // Admin
             // 
@@ -456,6 +483,7 @@ namespace toko_cat
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -493,5 +521,8 @@ namespace toko_cat
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
+        private ReportPenjualan ReportPenjualan1;
     }
 }
