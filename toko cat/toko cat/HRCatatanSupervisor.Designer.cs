@@ -62,6 +62,7 @@ namespace toko_cat
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridView1);
             this.Name = "HRCatatanSupervisor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Catatan Supervisor";
             this.Load += new System.EventHandler(this.HRCatatanSupervisor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
