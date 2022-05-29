@@ -25,6 +25,10 @@ namespace toko_cat
             rpt.SetParameterValue("invoice", invoice);
 
             crystalReportViewer1.ReportSource = rpt;
+
+            crystalReportViewer1.ShowPrintButton = false;
+            crystalReportViewer1.ShowExportButton = false;
+            crystalReportViewer1.ShowRefreshButton = false;
         }
     }
 }
