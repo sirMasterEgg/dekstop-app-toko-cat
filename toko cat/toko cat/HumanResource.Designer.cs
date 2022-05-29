@@ -406,6 +406,7 @@ namespace toko_cat
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "HumanResource";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Human Resource";
             this.Load += new System.EventHandler(this.HumanResource_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -84,12 +84,6 @@
       <DependentUpon>SupervisorRpt.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DeliveryReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeliveryReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DeliveryStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,12 +141,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportDelivery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReportDelivery.Designer.cs">
-      <DependentUpon>ReportDelivery.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReportHR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,10 +214,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SupervisorRpt.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeliveryReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DeliveryReport.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="DeliveryStatus.resx">
       <DependentUpon>DeliveryStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -269,9 +253,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReportDelivery.resx">
-      <DependentUpon>ReportDelivery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ReportHR.resx">
       <DependentUpon>ReportHR.cs</DependentUpon>
     </EmbeddedResource>
