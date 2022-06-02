@@ -16,14 +16,14 @@ namespace toko_cat {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ScheduleReport : ReportClass {
+    public class Absen : ReportClass {
         
-        public ScheduleReport() {
+        public Absen() {
         }
         
         public override string ResourceName {
             get {
-                return "ScheduleReport.rpt";
+                return "Absen.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace toko_cat {
         
         public override string FullResourceName {
             get {
-                return "toko_cat.ScheduleReport.rpt";
+                return "toko_cat.Absen.rpt";
             }
             set {
                 // Do nothing
@@ -103,12 +103,20 @@ namespace toko_cat {
                 return this.ReportDefinition.Sections[6];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_idUser {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedScheduleReport : Component, ICachedReport {
+    public class CachedAbsen : Component, ICachedReport {
         
-        public CachedScheduleReport() {
+        public CachedAbsen() {
         }
         
         [Browsable(false)]
@@ -145,7 +153,7 @@ namespace toko_cat {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ScheduleReport rpt = new ScheduleReport();
+            Absen rpt = new Absen();
             rpt.Site = this.Site;
             return rpt;
         }

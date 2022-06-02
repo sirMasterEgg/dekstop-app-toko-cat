@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Absen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Absen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="AddToko.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,12 @@
       <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Barang.cs" />
+    <Compile Include="ScheduleReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SupervisorRpt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +213,10 @@
     <Compile Include="SupervisorReportForm.Designer.cs">
       <DependentUpon>SupervisorReportForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Absen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Absen.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddToko.resx">
       <DependentUpon>AddToko.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +225,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminAddOrderItem.resx">
       <DependentUpon>AdminAddOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScheduleReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ScheduleReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SupervisorRpt.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
