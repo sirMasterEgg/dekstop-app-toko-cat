@@ -344,5 +344,13 @@ namespace toko_cat
                 MessageBox.Show(excep.Message);
             }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            SupervisorScheduleReportForm newForm = new SupervisorScheduleReportForm();
+            newForm.ShowDialog();
+            this.Show();
+        }
     }
 }

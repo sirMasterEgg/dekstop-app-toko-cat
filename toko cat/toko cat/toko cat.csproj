@@ -65,6 +65,12 @@
       <DependentUpon>Absen.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="AbsenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbsenForm.Designer.cs">
+      <DependentUpon>AbsenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddToko.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,9 +219,18 @@
     <Compile Include="SupervisorReportForm.Designer.cs">
       <DependentUpon>SupervisorReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SupervisorScheduleReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupervisorScheduleReportForm.Designer.cs">
+      <DependentUpon>SupervisorScheduleReportForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Absen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Absen.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbsenForm.resx">
+      <DependentUpon>AbsenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddToko.resx">
       <DependentUpon>AddToko.cs</DependentUpon>
@@ -303,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SupervisorReportForm.resx">
       <DependentUpon>SupervisorReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupervisorScheduleReportForm.resx">
+      <DependentUpon>SupervisorScheduleReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">

@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnclear = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKunjungan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,9 +50,10 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 336);
+            this.label1.Location = new System.Drawing.Point(6, 273);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 17);
+            this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Hari Kunjungan :";
             // 
@@ -59,9 +61,10 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 362);
+            this.label2.Location = new System.Drawing.Point(6, 294);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 17);
+            this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Toko Tujuan :";
             // 
@@ -69,9 +72,10 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 389);
+            this.label3.Location = new System.Drawing.Point(6, 316);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 17);
+            this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Sales :";
             // 
@@ -80,10 +84,10 @@
             this.cbtoko.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbtoko.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbtoko.FormattingEnabled = true;
-            this.cbtoko.Location = new System.Drawing.Point(143, 359);
-            this.cbtoko.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbtoko.Location = new System.Drawing.Point(107, 292);
+            this.cbtoko.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbtoko.Name = "cbtoko";
-            this.cbtoko.Size = new System.Drawing.Size(218, 24);
+            this.cbtoko.Size = new System.Drawing.Size(164, 21);
             this.cbtoko.TabIndex = 4;
             // 
             // cbsales
@@ -91,19 +95,19 @@
             this.cbsales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbsales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbsales.FormattingEnabled = true;
-            this.cbsales.Location = new System.Drawing.Point(143, 386);
-            this.cbsales.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbsales.Location = new System.Drawing.Point(107, 314);
+            this.cbsales.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbsales.Name = "cbsales";
-            this.cbsales.Size = new System.Drawing.Size(218, 24);
+            this.cbsales.Size = new System.Drawing.Size(164, 21);
             this.cbsales.TabIndex = 5;
             // 
             // btntambah
             // 
             this.btntambah.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btntambah.Location = new System.Drawing.Point(12, 422);
-            this.btntambah.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btntambah.Location = new System.Drawing.Point(9, 343);
+            this.btntambah.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btntambah.Name = "btntambah";
-            this.btntambah.Size = new System.Drawing.Size(126, 34);
+            this.btntambah.Size = new System.Drawing.Size(94, 28);
             this.btntambah.TabIndex = 6;
             this.btntambah.Text = "Tambah Data";
             this.btntambah.UseVisualStyleBackColor = true;
@@ -112,10 +116,10 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(366, 359);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Location = new System.Drawing.Point(274, 292);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 22);
+            this.button2.Size = new System.Drawing.Size(22, 18);
             this.button2.TabIndex = 7;
             this.button2.Text = "+";
             this.button2.UseVisualStyleBackColor = true;
@@ -132,8 +136,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvKunjungan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvKunjungan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKunjungan.Location = new System.Drawing.Point(11, 10);
-            this.dgvKunjungan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvKunjungan.Location = new System.Drawing.Point(8, 8);
+            this.dgvKunjungan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvKunjungan.Name = "dgvKunjungan";
             this.dgvKunjungan.ReadOnly = true;
             this.dgvKunjungan.RowHeadersVisible = false;
@@ -141,7 +145,7 @@
             this.dgvKunjungan.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvKunjungan.RowTemplate.Height = 28;
             this.dgvKunjungan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKunjungan.Size = new System.Drawing.Size(833, 307);
+            this.dgvKunjungan.Size = new System.Drawing.Size(625, 249);
             this.dgvKunjungan.TabIndex = 8;
             this.dgvKunjungan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKunjungan_CellClick);
             // 
@@ -150,20 +154,20 @@
             this.cbhari.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbhari.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbhari.FormattingEnabled = true;
-            this.cbhari.Location = new System.Drawing.Point(143, 332);
-            this.cbhari.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbhari.Location = new System.Drawing.Point(107, 270);
+            this.cbhari.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbhari.Name = "cbhari";
-            this.cbhari.Size = new System.Drawing.Size(218, 24);
+            this.cbhari.Size = new System.Drawing.Size(164, 21);
             this.cbhari.TabIndex = 9;
             // 
             // btnupdate
             // 
             this.btnupdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnupdate.Enabled = false;
-            this.btnupdate.Location = new System.Drawing.Point(143, 422);
-            this.btnupdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnupdate.Location = new System.Drawing.Point(107, 343);
+            this.btnupdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnupdate.Name = "btnupdate";
-            this.btnupdate.Size = new System.Drawing.Size(126, 34);
+            this.btnupdate.Size = new System.Drawing.Size(94, 28);
             this.btnupdate.TabIndex = 10;
             this.btnupdate.Text = "Update Data";
             this.btnupdate.UseVisualStyleBackColor = true;
@@ -173,10 +177,10 @@
             // 
             this.btndelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btndelete.Enabled = false;
-            this.btndelete.Location = new System.Drawing.Point(275, 422);
-            this.btndelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btndelete.Location = new System.Drawing.Point(206, 343);
+            this.btndelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btndelete.Name = "btndelete";
-            this.btndelete.Size = new System.Drawing.Size(126, 34);
+            this.btndelete.Size = new System.Drawing.Size(94, 28);
             this.btndelete.TabIndex = 11;
             this.btndelete.Text = "Delete Data";
             this.btndelete.UseVisualStyleBackColor = true;
@@ -186,9 +190,10 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(456, 332);
+            this.label4.Location = new System.Drawing.Point(342, 270);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 17);
+            this.label4.Size = new System.Drawing.Size(81, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "ID Kunjungan : ";
             // 
@@ -196,29 +201,40 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(566, 330);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Location = new System.Drawing.Point(424, 268);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 22);
+            this.textBox1.Size = new System.Drawing.Size(109, 20);
             this.textBox1.TabIndex = 13;
             // 
             // btnclear
             // 
             this.btnclear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnclear.Location = new System.Drawing.Point(406, 423);
-            this.btnclear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnclear.Location = new System.Drawing.Point(304, 344);
+            this.btnclear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnclear.Name = "btnclear";
-            this.btnclear.Size = new System.Drawing.Size(126, 34);
+            this.btnclear.Size = new System.Drawing.Size(94, 28);
             this.btnclear.TabIndex = 14;
             this.btnclear.Text = "Clear";
             this.btnclear.UseVisualStyleBackColor = true;
             this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(558, 325);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 44);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Report Kunjungan";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // SupervisorAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 466);
+            this.ClientSize = new System.Drawing.Size(640, 379);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
@@ -233,7 +249,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SupervisorAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tambah Data Kunjungan";
@@ -260,5 +276,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnclear;
+        private System.Windows.Forms.Button button1;
     }
 }

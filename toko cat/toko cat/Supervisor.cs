@@ -257,5 +257,13 @@ namespace toko_cat
 
             cbsales.SelectedIndex = 0;
         }
+
+        private void lembarAbsenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbsenForm newForm = new AbsenForm();
+            newForm.ShowDialog();
+            this.Show();
+        }
     }
 }
