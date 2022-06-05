@@ -11,6 +11,7 @@ namespace toko_cat
         MySqlDataAdapter da;
         int orderIndex, detailIndex, historyIndex, itemIndex;
         int idxPilihToko = -1;
+        string invoice;
         public Admin()
         {
             InitializeComponent();
@@ -409,6 +410,14 @@ namespace toko_cat
 
         }
 
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            FormInvoice newForm = new FormInvoice(invoice);
+            newForm.StartPosition = FormStartPosition.CenterScreen;
+
+            newForm.ShowDialog();   
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             AdminAddOrderItem form = new AdminAddOrderItem(orderIndex);
@@ -471,6 +480,8 @@ namespace toko_cat
             int index = reader.GetInt32(0);
             loadOrderDetails(index);
             historyIndex = index;
+            button10.Enabled = true;
+            invoice = dtHistory.Rows[e.RowIndex][0].ToString();
             loadHistoryDetails();
         }
 
