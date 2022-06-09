@@ -22,6 +22,8 @@ namespace toko_cat
             form.ShowDialog();
             form.Dispose();
             this.Show();
+
+            refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -31,16 +33,22 @@ namespace toko_cat
             form.Dispose();
         }
 
-        private void InventoryDelivery_Load(object sender, EventArgs e)
+        private void refresh()
         {
-            numericUpDown1.Value = 0;
-            numericUpDown1.Enabled = false;
-            button1.Enabled = false;
             DataTable dt = new DataTable("item");
             MySqlCommand cmd = new MySqlCommand("select IT_ID as ID, IT_NAME as Nama, concat('Rp ', format(IT_PRICE, 0)) as Harga, IT_STOCK as Stok from item where IT_STATUS = 1", Connection.Conn);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+        }
+
+        private void InventoryDelivery_Load(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = 0;
+            numericUpDown1.Enabled = false;
+            button1.Enabled = false;
+
+            refresh();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
