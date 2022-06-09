@@ -77,7 +77,7 @@ namespace toko_cat
         {
             mode = 0;
             DataTable dt1 = new DataTable("user");
-            MySqlCommand cmd1 = new MySqlCommand("select US_ID as ID, US_USERNAME as Username, US_PASSWORD as Password, US_NAME as Nama, US_EMAIL as Email, US_PHONE as \"Nomor Telepon\", US_ADDRESS as Alamat, TY_NAME as Tipe, concat('Rp ', format(US_SALARY, 0)) as Gaji, if(US_STATUS = 1, 'Aktif', 'Tidak Aktif') as Status from user join type on US_TY_ID = TY_ID order by US_ID", Connection.Conn);
+            MySqlCommand cmd1 = new MySqlCommand("select US_ID as ID, US_USERNAME as Username, US_PASSWORD as Password, US_NAME as Nama, US_EMAIL as Email, US_PHONE as \"Nomor Telepon\", US_ADDRESS as Alamat, TY_NAME as Tipe, concat('Rp ', format(US_SALARY, 0)) as Gaji, if(US_STATUS = 1, 'Aktif', 'Tidak Aktif') as Status from user join type on US_TY_ID = TY_ID order by US_STATUS desc, US_ID", Connection.Conn);
             MySqlDataAdapter da1 = new MySqlDataAdapter(cmd1);
             da1.Fill(dt1);
             dataGridView1.DataSource = dt1;
@@ -193,20 +193,20 @@ namespace toko_cat
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Connection.Conn.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from user where US_ID = @usid", Connection.Conn);
-                cmd.Parameters.AddWithValue("@usid", textBox1.Text);
-                cmd.ExecuteNonQuery();
-                Connection.Conn.Close();
-                button4.PerformClick();
-            }
-            catch
-            {
-                Connection.Conn.Close();
-                MessageBox.Show("User tidak dapat dihapus!");
-            }
+            //try
+            //{
+            //    Connection.Conn.Open();
+            //    MySqlCommand cmd = new MySqlCommand("delete from user where US_ID = @usid", Connection.Conn);
+            //    cmd.Parameters.AddWithValue("@usid", textBox1.Text);
+            //    cmd.ExecuteNonQuery();
+            //    Connection.Conn.Close();
+            //    button4.PerformClick();
+            //}
+            //catch
+            //{
+            //    Connection.Conn.Close();
+            //    MessageBox.Show("User tidak dapat dihapus!");
+            //}
         }
 
         private void button5_Click(object sender, EventArgs e)

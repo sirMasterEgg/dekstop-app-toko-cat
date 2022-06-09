@@ -337,14 +337,15 @@ namespace toko_cat
             this.button3.TabIndex = 24;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(821, 380);
+            this.button4.Location = new System.Drawing.Point(719, 380);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 31);
+            this.button4.Size = new System.Drawing.Size(199, 31);
             this.button4.TabIndex = 25;
             this.button4.Text = "Clear";
             this.button4.UseVisualStyleBackColor = true;
