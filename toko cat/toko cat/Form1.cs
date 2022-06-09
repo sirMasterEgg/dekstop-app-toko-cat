@@ -146,14 +146,14 @@ namespace toko_cat
 
                 script.Query = @"CREATE OR REPLACE
                                 FUNCTION `db_toko_cat`.`generateCountAbsen`(
-	                            idUser INT(11)
+	                            idUser INT(11), idToko INT(11)
                                 )
                                 RETURNS INT
                                 BEGIN
 	                            DECLARE banyakAbsen INT;
 	
 	                            SELECT COUNT(*) INTO banyakAbsen FROM absen 
-	                            WHERE ab_us_id = idUser AND DATE(ab_date) = DATE(NOW());
+	                            WHERE ab_us_id = idUser AND DATE(ab_date) = DATE(NOW()) AND ab_toko_id = idToko;
 	
 	                            RETURN banyakAbsen;
                                 END$$";

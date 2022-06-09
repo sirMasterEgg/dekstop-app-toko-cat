@@ -17,6 +17,24 @@ namespace toko_cat
             InitializeComponent();
         }
 
+        private bool cekSudahPernahDiAssign(String id_user, String id_toko, String id_hari)
+        {
+            bool cek = true;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM visit WHERE v_toko_id = @toko AND v_da_id = @hari AND v_us_id = @user";
+            cmd.Parameters.AddWithValue("@toko", id_toko);
+            cmd.Parameters.AddWithValue("@hari", id_hari);
+            cmd.Parameters.AddWithValue("@user", id_user);
+
+            if (Connection.executeScalar(cmd) > 0)
+            {
+                MessageBox.Show("Sudah di assign ! Jangan kedobelan !");
+                cek = false;
+            }
+
+            return cek;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             MySqlCommand cmd;
@@ -33,21 +51,24 @@ namespace toko_cat
             string tujuan = (cbhari.SelectedItem as dynamic).Value;
             try
             {
-                cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (@id, @tokoid, @day, @status, @userid);";
-                cmd.Parameters.Add(new MySqlParameter("@id", id));
-                cmd.Parameters.Add(new MySqlParameter("@tokoid", idToko));
-                cmd.Parameters.Add(new MySqlParameter("@day", tujuan));
-                cmd.Parameters.Add(new MySqlParameter("@status", "1"));
-                cmd.Parameters.Add(new MySqlParameter("@userid", idSales));
+                if (cekSudahPernahDiAssign(idSales,idToko,tujuan))
+                {
+                    cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (@id, @tokoid, @day, @status, @userid);";
+                    cmd.Parameters.Add(new MySqlParameter("@id", id));
+                    cmd.Parameters.Add(new MySqlParameter("@tokoid", idToko));
+                    cmd.Parameters.Add(new MySqlParameter("@day", tujuan));
+                    cmd.Parameters.Add(new MySqlParameter("@status", "1"));
+                    cmd.Parameters.Add(new MySqlParameter("@userid", idSales));
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
-                MessageBox.Show("Berhasil Ditambahkan!");
-                clear();
+                    MessageBox.Show("Berhasil Ditambahkan!");
+                    clear();
+                }
             }
             catch (Exception excep)
             {

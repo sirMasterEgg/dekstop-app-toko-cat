@@ -25,6 +25,7 @@ namespace toko_cat
 
         private void loadDataGrid()
         {
+
             if (conn.State == ConnectionState.Open)
             {
                 conn.Close();
@@ -37,23 +38,21 @@ namespace toko_cat
             cmd.Connection = conn;
 
             cmd.CommandText = @"SELECT V_ID        AS 'ID Kunjungan',
-                                       t.TOKO_NAME AS 'Toko Tujuan',
-                                       d.DA_NAME   AS 'Hari Visit',
-                                       u.US_NAME   AS 'Nama Sales',
-                                       IF(generateCountAbsen(u.US_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
+                                t.TOKO_NAME AS 'Toko Tujuan',
+                                d.DA_NAME   AS 'Hari Visit',
+                                u.US_NAME   AS 'Nama Sales',
+                                IF(generateCountAbsen(u.US_ID, t.TOKO_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
                                 FROM visit v
-                                         LEFT JOIN USER u ON u.US_ID = v.V_US_ID
-                                         LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
-                                         LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                         LEFT JOIN absen a ON u.US_ID = a.AB_US_ID
+                                LEFT JOIN USER u ON u.US_ID = v.V_US_ID
+                                LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
+                                LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
                                 WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');";
             conn.Open();
             cmd.ExecuteReader();
             conn.Close();
             da.SelectCommand = cmd;
             da.Fill(dtSupervisor);
-            
-            dgvSupervisor.DataSource = null;
+
             dgvSupervisor.DataSource = dtSupervisor;
 
             foreach (DataGridViewColumn column in dgvSupervisor.Columns)
@@ -64,16 +63,16 @@ namespace toko_cat
             dgvSupervisor.ClearSelection();
 
             cmd.CommandText = @"SELECT V_ID        AS 'ID Kunjungan',
-                                       t.TOKO_NAME AS 'Toko Tujuan',
-                                       d.DA_NAME   AS 'Hari Visit',
-                                       u.US_NAME   AS 'Nama Sales',
-                                       u.US_ID     AS 'ID Sales',
-                                       IF(generateCountAbsen(u.US_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
+                                t.TOKO_ID   AS 'ID Toko',
+                                t.TOKO_NAME AS 'Toko Tujuan',
+                                d.DA_NAME   AS 'Hari Visit',
+                                u.US_NAME   AS 'Nama Sales',
+                                u.US_ID     AS 'ID Sales',
+                                IF(generateCountAbsen(u.US_ID, t.TOKO_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
                                 FROM visit v
-                                         LEFT JOIN USER u ON u.US_ID = v.V_US_ID
-                                         LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
-                                         LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                         LEFT JOIN absen a ON u.US_ID = a.AB_US_ID
+                                LEFT JOIN USER u ON u.US_ID = v.V_US_ID
+                                LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
+                                LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
                                 WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');";
             dtSupervisorTemp = Connection.executeAdapter(cmd);
 
@@ -93,16 +92,16 @@ namespace toko_cat
             cmd.Connection = conn;
 
             cmd.CommandText = @"SELECT V_ID        AS 'ID Kunjungan',
-                                       t.TOKO_NAME AS 'Toko Tujuan',
-                                       d.DA_NAME   AS 'Hari Visit',
-                                       u.US_NAME   AS 'Nama Sales',
-                                       IF(generateCountAbsen(u.US_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
+                                t.TOKO_NAME AS 'Toko Tujuan',
+                                d.DA_NAME   AS 'Hari Visit',
+                                u.US_NAME   AS 'Nama Sales',
+                                IF(generateCountAbsen(u.US_ID, t.TOKO_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
                                 FROM visit v
-                                         LEFT JOIN USER u ON u.US_ID = v.V_US_ID
-                                         LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
-                                         LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                         LEFT JOIN absen a ON u.US_ID = a.AB_US_ID
-                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w') and u.US_ID = @id;";
+                                LEFT JOIN USER u ON u.US_ID = v.V_US_ID
+                                LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
+                                LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
+                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');
+                                ";
             conn.Open();
             cmd.Parameters.Clear();
             cmd.Parameters.Add(new MySqlParameter("@id", id));
@@ -121,18 +120,18 @@ namespace toko_cat
             
             dgvSupervisor.ClearSelection();
 
-            cmd.CommandText = @"SELECT V_ID        AS 'ID Kunjungan',
-                                       t.TOKO_NAME AS 'Toko Tujuan',
-                                       d.DA_NAME   AS 'Hari Visit',
-                                       u.US_NAME   AS 'Nama Sales',
-                                       u.US_ID     AS 'ID Sales',
-                                       IF(generateCountAbsen(u.US_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
+            cmd.CommandText = @"SELECT V_ID AS 'ID Kunjungan',
+                                t.TOKO_ID   AS 'ID Toko',
+                                t.TOKO_NAME AS 'Toko Tujuan',
+                                d.DA_NAME   AS 'Hari Visit',
+                                u.US_NAME   AS 'Nama Sales',
+                                u.US_ID     AS 'ID Sales',
+                                IF(generateCountAbsen(u.US_ID,t.TOKO_ID)=0,'Belum Dikunjungi', 'Sudah Dikunjungi') AS 'Absen'
                                 FROM visit v
-                                         LEFT JOIN USER u ON u.US_ID = v.V_US_ID
-                                         LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
-                                         LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                         LEFT JOIN absen a ON u.US_ID = a.AB_US_ID
-                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w') and u.US_ID = @id;";
+                                LEFT JOIN USER u ON u.US_ID = v.V_US_ID
+                                LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
+                                LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
+                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');";
             cmd.Parameters.Clear();
             cmd.Parameters.Add(new MySqlParameter("@id", id));
             dtSupervisorTemp = Connection.executeAdapter(cmd);
@@ -152,6 +151,26 @@ namespace toko_cat
             status.ShowDialog();
         }
 
+        private bool cekSudahAbsen(String us_id, String toko_id)
+        {
+            bool cek = true;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM absen WHERE ab_us_id = @us AND ab_toko_id = @toko AND DATE(ab_date) = DATE(NOW());";
+            cmd.Parameters.AddWithValue("@us", us_id);
+            cmd.Parameters.AddWithValue("@toko", toko_id);
+
+            int banyakCount = Connection.executeScalar(cmd);
+
+            if (banyakCount > 0)
+            {
+                MessageBox.Show("Sudah Pernah Absen !");
+                cek = false;
+            }
+
+            return cek;
+        }
+
         private void dgvSupervisor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int idDGV = e.RowIndex;
@@ -164,20 +183,27 @@ namespace toko_cat
                 conn.Close();
             }
 
+            String id_user = dtSupervisorTemp.Rows[idDGV]["ID Sales"].ToString();
+            String id_toko = dtSupervisorTemp.Rows[idDGV][1].ToString();
+
             try
             {
-                cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "insert into absen (AB_ID, AB_US_ID, AB_DATE) values (@id, @userid, now());";
-                cmd.Parameters.Add(new MySqlParameter("@id", id));
-                cmd.Parameters.Add(new MySqlParameter("@userid", dtSupervisorTemp.Rows[idDGV]["ID Sales"].ToString()));
+                if (cekSudahAbsen(id_user,id_toko))
+                {
+                    cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "insert into absen (AB_ID, AB_US_ID, AB_DATE, AB_TOKO_ID) values (@id, @userid, now(), @id_visit);";
+                    cmd.Parameters.Add(new MySqlParameter("@id", id));
+                    cmd.Parameters.Add(new MySqlParameter("@userid", id_user));
+                    cmd.Parameters.AddWithValue("@id_visit", id_toko);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
-                MessageBox.Show("Sudah Absen!");
-                loadDataGrid();
+                    MessageBox.Show("Sudah Absen!");
+                    loadDataGrid();
+                }
             }
             catch (Exception excep)
             {

@@ -24,13 +24,12 @@ CREATE TABLE `absen` (
   `AB_ID` int(11) NOT NULL AUTO_INCREMENT,
   `AB_US_ID` int(11) NOT NULL,
   `AB_DATE` datetime NOT NULL,
+  `AB_TOKO_ID` int(11) NOT NULL,
   PRIMARY KEY (`AB_ID`),
   KEY `AB_US_ID` (`AB_US_ID`),
-  CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`AB_US_ID`) REFERENCES `user` (`US_ID`)
+  CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`AB_US_ID`) REFERENCES `user` (`US_ID`),
+  CONSTRAINT `absen_ibfk_2` FOREIGN KEY (`AB_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `absen` */
-insert into absen (AB_ID, AB_US_ID, AB_DATE) values (1, 10, now());
 
 /*Table structure for table `day` */
 
