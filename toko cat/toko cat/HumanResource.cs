@@ -9,6 +9,7 @@ namespace toko_cat
     public partial class HumanResource : Form
     {
         private int mode;
+        private int index;
 
         public HumanResource()
         {
@@ -46,7 +47,8 @@ namespace toko_cat
 
         private bool valid()
         {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || comboBox1.SelectedIndex == -1 || numericUpDown1.Value == 0 || !radioButton1.Checked && !radioButton2.Checked)
+            //if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || comboBox1.SelectedIndex == -1 || numericUpDown1.Value == 0 || !radioButton1.Checked && !radioButton2.Checked)
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || comboBox1.SelectedIndex == -1 || numericUpDown1.Value == 0 || !radioButton1.Checked && !radioButton2.Checked)
             {
                 MessageBox.Show("Semua field harus terisi!");
                 return false;
@@ -79,6 +81,7 @@ namespace toko_cat
             MySqlDataAdapter da1 = new MySqlDataAdapter(cmd1);
             da1.Fill(dt1);
             dataGridView1.DataSource = dt1;
+            dataGridView1.Columns[2].Visible = false;
             DataTable dt2 = new DataTable("type");
             MySqlCommand cmd2 = new MySqlCommand("select * from type", Connection.Conn);
             MySqlDataAdapter da2 = new MySqlDataAdapter(cmd2);
@@ -104,49 +107,58 @@ namespace toko_cat
             button5.Enabled = false;
             button6.Enabled = true;
             mode = 1;
+            index = -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (valid())
             {
-                Connection.Conn.Open();
-                MySqlCommand cmd = new MySqlCommand("insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY, US_STATUS) values(@usid, @ususername, @uspassword, @usname, @usemail, @usphone, @usaddress, @ustyid, @ussalary, @usstatus)", Connection.Conn);
-                cmd.Parameters.AddWithValue("@usid", textBox1.Text);
-                cmd.Parameters.AddWithValue("@ususername", textBox2.Text);
-                cmd.Parameters.AddWithValue("@uspassword", textBox3.Text);
-                cmd.Parameters.AddWithValue("@usname", textBox4.Text);
-                cmd.Parameters.AddWithValue("@usemail", textBox5.Text);
-                cmd.Parameters.AddWithValue("@usphone", textBox6.Text);
-                cmd.Parameters.AddWithValue("@usaddress", textBox7.Text);
-                cmd.Parameters.AddWithValue("@ustyid", comboBox1.SelectedValue);
-                cmd.Parameters.AddWithValue("@ussalary", numericUpDown1.Value);
-                cmd.Parameters.AddWithValue("@usstatus", radioButton1.Checked ? 1 : 0);
-                cmd.ExecuteNonQuery();
-                Connection.Conn.Close();
-                button4.PerformClick();
+                if (textBox3.Text == "")
+                {
+                    MessageBox.Show("Semua field harus terisi!");
+                }
+                else
+                {
+                    Connection.Conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY, US_STATUS) values(@usid, @ususername, @uspassword, @usname, @usemail, @usphone, @usaddress, @ustyid, @ussalary, @usstatus)", Connection.Conn);
+                    cmd.Parameters.AddWithValue("@usid", textBox1.Text);
+                    cmd.Parameters.AddWithValue("@ususername", textBox2.Text);
+                    cmd.Parameters.AddWithValue("@uspassword", textBox3.Text);
+                    cmd.Parameters.AddWithValue("@usname", textBox4.Text);
+                    cmd.Parameters.AddWithValue("@usemail", textBox5.Text);
+                    cmd.Parameters.AddWithValue("@usphone", textBox6.Text);
+                    cmd.Parameters.AddWithValue("@usaddress", textBox7.Text);
+                    cmd.Parameters.AddWithValue("@ustyid", comboBox1.SelectedValue);
+                    cmd.Parameters.AddWithValue("@ussalary", numericUpDown1.Value);
+                    cmd.Parameters.AddWithValue("@usstatus", radioButton1.Checked ? 1 : 0);
+                    cmd.ExecuteNonQuery();
+                    Connection.Conn.Close();
+                    button4.PerformClick();
+                }
             }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            index = e.RowIndex;
+            if (index != -1)
             {
                 mode = 2;
                 button1.Enabled = false;
                 button2.Enabled = true;
                 button3.Enabled = true;
                 button5.Enabled = true;
-                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                comboBox1.SelectedIndex = comboBox1.FindStringExact(dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-                numericUpDown1.Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString().Replace("Rp ", "").Replace(",", ""));
-                if (dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString() == "Aktif")
+                textBox1.Text = dataGridView1.Rows[index].Cells[0].Value.ToString();
+                textBox2.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
+                //textBox3.Text = dataGridView1.Rows[index].Cells[2].Value.ToString();
+                textBox4.Text = dataGridView1.Rows[index].Cells[3].Value.ToString();
+                textBox5.Text = dataGridView1.Rows[index].Cells[4].Value.ToString();
+                textBox6.Text = dataGridView1.Rows[index].Cells[5].Value.ToString();
+                textBox7.Text = dataGridView1.Rows[index].Cells[6].Value.ToString();
+                comboBox1.SelectedIndex = comboBox1.FindStringExact(dataGridView1.Rows[index].Cells[7].Value.ToString());
+                numericUpDown1.Value = Convert.ToInt32(dataGridView1.Rows[index].Cells[8].Value.ToString().Replace("Rp ", "").Replace(",", ""));
+                if (dataGridView1.Rows[index].Cells[9].Value.ToString() == "Aktif")
                 {
                     radioButton1.Checked = true;
                 }
@@ -165,7 +177,7 @@ namespace toko_cat
                 MySqlCommand cmd = new MySqlCommand("update user set US_USERNAME = @ususername, US_PASSWORD = @uspassword, US_NAME = @usname, US_EMAIL = @usemail, US_PHONE = @usphone, US_ADDRESS = @usaddress, US_TY_ID = @ustyid, US_SALARY = @ussalary, US_STATUS = @usstatus where US_ID = @usid", Connection.Conn);
                 cmd.Parameters.AddWithValue("@usid", textBox1.Text);
                 cmd.Parameters.AddWithValue("@ususername", textBox2.Text);
-                cmd.Parameters.AddWithValue("@uspassword", textBox3.Text);
+                cmd.Parameters.AddWithValue("@uspassword", textBox3.Text == "" ? dataGridView1.Rows[index].Cells[2].Value.ToString() : textBox3.Text);
                 cmd.Parameters.AddWithValue("@usname", textBox4.Text);
                 cmd.Parameters.AddWithValue("@usemail", textBox5.Text);
                 cmd.Parameters.AddWithValue("@usphone", textBox6.Text);
