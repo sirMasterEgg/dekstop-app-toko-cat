@@ -27,9 +27,12 @@ CREATE TABLE `absen` (
   `AB_TOKO_ID` int(11) NOT NULL,
   PRIMARY KEY (`AB_ID`),
   KEY `AB_US_ID` (`AB_US_ID`),
+  KEY `absen_ibfk_2` (`AB_TOKO_ID`),
   CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`AB_US_ID`) REFERENCES `user` (`US_ID`),
   CONSTRAINT `absen_ibfk_2` FOREIGN KEY (`AB_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `absen` */
 
 /*Table structure for table `day` */
 
@@ -73,16 +76,16 @@ CREATE TABLE `dtrans_item` (
 /*Data for the table `dtrans_item` */
 
 insert  into `dtrans_item`(`DT_ID`,`DT_IT_ID`,`DT_AMOUNT`,`DT_SUBTOTAL`,`DT_HT_ID`,`DT_STATUS`) values 
-(1,1,1,50000,1,1),
-(2,2,1,45000,2,1),
-(3,3,1,60000,3,1),
-(4,4,1,40000,4,1),
-(5,5,1,50000,5,1),
-(6,6,1,40000,1,1),
-(7,7,1,50000,2,1),
-(8,8,1,55000,3,1),
-(9,9,1,55000,4,1),
-(10,10,1,45000,5,1);
+(1,1,10,500000,1,1),
+(2,2,10,450000,2,1),
+(3,3,10,600000,3,1),
+(4,4,10,400000,4,1),
+(5,5,10,500000,5,1),
+(6,6,10,400000,1,1),
+(7,7,10,500000,2,1),
+(8,8,10,550000,3,1),
+(9,9,10,550000,4,1),
+(10,10,10,450000,5,1);
 
 /*Table structure for table `htrans_item` */
 
@@ -106,11 +109,11 @@ CREATE TABLE `htrans_item` (
 /*Data for the table `htrans_item` */
 
 insert  into `htrans_item`(`HT_ID`,`HT_US_ID`,`HT_TO_ID`,`HT_DATE`,`HT_INVOICE_NUMBER`,`HT_TOTAL`,`HT_STATUS`) values 
-(1,6,1,'2022-05-21 17:11:57','12205211001',90000,1),
-(2,7,2,'2022-05-21 17:11:57','12205211002',95000,1),
-(3,8,3,'2022-05-21 17:11:57','12205211003',115000,1),
-(4,9,4,'2022-05-21 17:11:57','12205211004',95000,1),
-(5,10,5,'2022-05-21 17:11:57','12205211005',95000,1);
+(1,6,1,'2022-05-21 17:11:57','12205211001',900000,1),
+(2,7,2,'2022-05-21 17:11:57','12205211002',950000,1),
+(3,8,3,'2022-05-21 17:11:57','12205211003',1150000,1),
+(4,9,4,'2022-05-21 17:11:57','12205211004',950000,1),
+(5,10,5,'2022-05-21 17:11:57','12205211005',950000,1);
 
 /*Table structure for table `item` */
 
@@ -153,7 +156,7 @@ CREATE TABLE `note` (
   PRIMARY KEY (`NO_ID`),
   KEY `NO_US_ID` (`NO_US_ID`),
   CONSTRAINT `note_ibfk_1` FOREIGN KEY (`NO_US_ID`) REFERENCES `user` (`US_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `note` */
 
@@ -162,7 +165,53 @@ insert  into `note`(`NO_ID`,`NO_CREATION_DATETIME`,`NO_TEXT`,`NO_US_ID`) values
 (2,'2022-05-21 15:47:07','User 2 ini adalah contoh user dengan tipe Salesperson.',2),
 (3,'2022-05-21 15:47:07','User 3 ini adalah contoh user dengan tipe Admin.',3),
 (4,'2022-05-21 15:47:07','User 4 ini adalah contoh user dengan tipe Inventory and Delivery Manager.',4),
-(5,'2022-05-21 15:47:07','User 5 ini adalah contoh user dengan tipe Human Resource.',5);
+(5,'2022-05-21 15:47:07','User 5 ini adalah contoh user dengan tipe Human Resource.',5),
+(6,'2022-06-09 17:56:08','Note dummy 1',6),
+(7,'2022-06-09 17:56:08','Note dummy 2',7),
+(8,'2022-06-09 17:56:08','Note dummy 3',8),
+(9,'2022-06-09 17:56:08','Note dummy 4',9),
+(10,'2022-06-09 17:56:08','Note dummy 5',10);
+
+/*Table structure for table `timestamp_stok` */
+
+DROP TABLE IF EXISTS `timestamp_stok`;
+
+CREATE TABLE `timestamp_stok` (
+  `TS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `TS_IT_ID` int(11) NOT NULL,
+  `TS_VALUE` int(11) NOT NULL,
+  `TS_DATE` datetime NOT NULL DEFAULT current_timestamp(),
+  `TS_STATUS` int(10) NOT NULL,
+  PRIMARY KEY (`TS_ID`),
+  KEY `timestamp_stok_ibfk_1` (`TS_IT_ID`),
+  CONSTRAINT `timestamp_stok_ibfk_1` FOREIGN KEY (`TS_IT_ID`) REFERENCES `item` (`IT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `timestamp_stok` */
+
+insert  into `timestamp_stok`(`TS_ID`,`TS_IT_ID`,`TS_VALUE`,`TS_DATE`,`TS_STATUS`) values 
+(1,1,210,'2022-05-19 12:00:00',1),
+(2,2,160,'2022-05-19 12:00:00',1),
+(3,3,110,'2022-05-19 12:00:00',1),
+(4,4,110,'2022-05-19 12:00:00',1),
+(5,5,260,'2022-05-19 12:00:00',1),
+(6,6,160,'2022-05-19 12:00:00',1),
+(7,7,110,'2022-05-19 12:00:00',1),
+(8,8,235,'2022-05-19 12:00:00',1),
+(9,9,180,'2022-05-19 12:00:00',1),
+(10,10,210,'2022-05-19 12:00:00',1),
+(11,11,100,'2022-05-19 12:00:00',1),
+(12,12,250,'2022-05-19 12:00:00',1),
+(13,1,10,'2022-05-21 17:11:57',2),
+(14,2,10,'2022-05-21 17:11:57',2),
+(15,3,10,'2022-05-21 17:11:57',2),
+(16,4,10,'2022-05-21 17:11:57',2),
+(17,5,10,'2022-05-21 17:11:57',2),
+(18,6,10,'2022-05-21 17:11:57',2),
+(19,7,10,'2022-05-21 17:11:57',2),
+(20,8,10,'2022-05-21 17:11:57',2),
+(21,9,10,'2022-05-21 17:11:57',2),
+(22,10,10,'2022-05-21 17:11:57',2);
 
 /*Table structure for table `toko` */
 
@@ -179,11 +228,11 @@ CREATE TABLE `toko` (
 /*Data for the table `toko` */
 
 insert  into `toko`(`TOKO_ID`,`TOKO_NAME`,`TOKO_ALAMAT`,`TOKO_PHONE`) values 
-(1,'Toko Haha', 'Jl. Toko 1', '0123456789'),
-(2,'Toko Hehe', 'Jl. Toko 2', '0123456789'),
-(3,'Toko Hihi', 'Jl. Toko 3', '0123456789'),
-(4,'Toko Hoho', 'Jl. Toko 4', '0123456789'),
-(5,'Toko Huhu', 'Jl. Toko 5', '0123456789');
+(1,'Toko Haha','Jl. Toko 1','0123456789'),
+(2,'Toko Hehe','Jl. Toko 2','0123456789'),
+(3,'Toko Hihi','Jl. Toko 3','0123456789'),
+(4,'Toko Hoho','Jl. Toko 4','0123456789'),
+(5,'Toko Huhu','Jl. Toko 5','0123456789');
 
 /*Table structure for table `type` */
 
@@ -254,25 +303,54 @@ CREATE TABLE `visit` (
   KEY `V_DA_ID` (`V_DA_ID`),
   CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`V_US_ID`) REFERENCES `user` (`US_ID`),
   CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`V_TOKO_ID`) REFERENCES `toko` (`TOKO_ID`),
-  constraint `visit_ibfk_3` foreign key (V_DA_ID) references day (DA_ID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DROP TABLE IF EXISTS `timestamp_stok`;
-
-CREATE TABLE `timestamp_stok` (
-	`TS_ID` int(11) NOT NULL AUTO_INCREMENT,
-	`TS_IT_ID` int(11) NOT NULL,
-	`TS_VALUE` int(11) NOT NULL,
-	`TS_DATE` datetime NOT NULL DEFAULT current_timestamp(),
-	`TS_STATUS` int(10) NOT NULL,
-	PRIMARY KEY (`TS_ID`),
-	CONSTRAINT 	`timestamp_stok_ibfk_1` FOREIGN KEY (`TS_IT_ID`) REFERENCES item (`IT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `visit_ibfk_3` FOREIGN KEY (`V_DA_ID`) REFERENCES `day` (`DA_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `visit` */
-insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (1,1,1,0,2);
-insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (2,2,2,0,6);
-insert into visit (V_ID, V_TOKO_ID, V_DA_ID, V_STATUS, V_US_ID) values (3,3,3,0,7);
+
+insert  into `visit`(`V_ID`,`V_TOKO_ID`,`V_DA_ID`,`V_STATUS`,`V_US_ID`) values 
+(1,1,1,0,2),
+(2,2,2,0,6),
+(3,3,3,0,7),
+(4,4,4,0,8),
+(5,5,5,0,9),
+(6,1,6,0,10),
+(7,2,7,0,2),
+(8,3,1,0,6),
+(9,4,2,0,7),
+(10,5,3,0,8),
+(11,1,4,0,9),
+(12,2,5,0,10),
+(13,3,6,0,2),
+(14,4,7,0,6),
+(15,5,1,0,7),
+(16,1,2,0,8),
+(17,2,3,0,9),
+(18,3,4,0,10),
+(19,4,5,0,2),
+(20,5,6,0,6),
+(21,1,7,0,7),
+(22,2,1,0,8),
+(23,3,2,0,9),
+(24,4,3,0,10),
+(25,5,4,0,2);
+
+/* Function  structure for function  `generateCountAbsen` */
+
+/*!50003 DROP FUNCTION IF EXISTS `generateCountAbsen` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateCountAbsen`(idUser INT(11), idToko INT(11)
+                                ) RETURNS int(11)
+BEGIN
+	                            DECLARE banyakAbsen INT;
+	
+	                            SELECT COUNT(*) INTO banyakAbsen FROM absen 
+	                            WHERE ab_us_id = idUser AND DATE(ab_date) = DATE(NOW()) AND ab_toko_id = idToko;
+	
+	                            RETURN banyakAbsen;
+                                END */$$
+DELIMITER ;
 
 /* Function  structure for function  `generateIDDtrans` */
 
@@ -283,15 +361,12 @@ DELIMITER $$
 BEGIN
                                     DECLARE idBesar INT;
                                     DECLARE banyak_dtrans INT;
-
                                     SELECT COUNT(*) INTO banyak_dtrans FROM dtrans_item;
-
                                     IF (banyak_dtrans > 0) THEN
                                             SELECT dt_id INTO idBesar FROM dtrans_item ORDER BY dt_id DESC LIMIT 1;
                                     ELSE
                                             SET idBesar = 0;
                                     END IF;
-
                                     RETURN idBesar+1;
                                 END */$$
 DELIMITER ;
@@ -305,15 +380,12 @@ DELIMITER $$
 BEGIN
                                     DECLARE idBesar INT;
                                     DECLARE banyak_htrans INT;
-
                                     SELECT COUNT(*) INTO banyak_htrans FROM htrans_item;
-
                                     IF (banyak_htrans > 0) THEN
                                             SELECT ht_id INTO idBesar FROM htrans_item ORDER BY ht_id DESC LIMIT 1;
                                     ELSE
                                             SET idBesar = 0;
                                     END IF;
-
                                     RETURN idBesar+1;
                                 END */$$
 DELIMITER ;
@@ -326,18 +398,13 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateInvoice`() RETURNS varchar(50) CHARSET utf8mb4
 BEGIN
                                     DECLARE hasil VARCHAR(50);
-
                                     DECLARE banyakInvoice INT;
-
                                     SELECT CONCAT('1',SUBSTR(YEAR(NOW()),3,2),
                                     IF(MONTH(NOW()) >= 10, MONTH(NOW()), CONCAT('0',MONTH(NOW()))),
                                     IF(DAY(NOW())>=10, DAY(NOW()), CONCAT('0',DAY(NOW()))),
                                     '1') INTO hasil;
-
                                     SELECT COUNT(*) INTO banyakInvoice FROM htrans_item WHERE ht_invoice_number LIKE CONCAT(hasil, '%');
-
                                     SET hasil = CONCAT(hasil,LPAD(banyakInvoice+1,3,'0'));
-
                                     RETURN hasil;
                                 END */$$
 DELIMITER ;
