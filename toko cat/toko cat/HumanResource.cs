@@ -121,7 +121,7 @@ namespace toko_cat
                 else
                 {
                     Connection.Conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY, US_STATUS) values(@usid, @ususername, @uspassword, @usname, @usemail, @usphone, @usaddress, @ustyid, @ussalary, @usstatus)", Connection.Conn);
+                    MySqlCommand cmd = new MySqlCommand("insert into user(US_ID, US_USERNAME, US_PASSWORD, US_NAME, US_EMAIL, US_PHONE, US_ADDRESS, US_TY_ID, US_SALARY, US_STATUS) values(@usid, @ususername, sha1(@uspassword), @usname, @usemail, @usphone, @usaddress, @ustyid, @ussalary, @usstatus)", Connection.Conn);
                     cmd.Parameters.AddWithValue("@usid", textBox1.Text);
                     cmd.Parameters.AddWithValue("@ususername", textBox2.Text);
                     cmd.Parameters.AddWithValue("@uspassword", textBox3.Text);
@@ -177,7 +177,18 @@ namespace toko_cat
                 MySqlCommand cmd = new MySqlCommand("update user set US_USERNAME = @ususername, US_PASSWORD = @uspassword, US_NAME = @usname, US_EMAIL = @usemail, US_PHONE = @usphone, US_ADDRESS = @usaddress, US_TY_ID = @ustyid, US_SALARY = @ussalary, US_STATUS = @usstatus where US_ID = @usid", Connection.Conn);
                 cmd.Parameters.AddWithValue("@usid", textBox1.Text);
                 cmd.Parameters.AddWithValue("@ususername", textBox2.Text);
-                cmd.Parameters.AddWithValue("@uspassword", textBox3.Text == "" ? dataGridView1.Rows[index].Cells[2].Value.ToString() : textBox3.Text);
+                string temp = textBox3.Text;
+                if (temp != "")
+                {
+                    MySqlCommand hash = new MySqlCommand("select sha1(@password)", Connection.Conn);
+                    hash.Parameters.AddWithValue("@password", temp);
+                    temp = hash.ExecuteScalar().ToString();
+                }
+                else
+                {
+                    temp = dataGridView1.Rows[index].Cells[2].Value.ToString();
+                }
+                cmd.Parameters.AddWithValue("@uspassword", temp);
                 cmd.Parameters.AddWithValue("@usname", textBox4.Text);
                 cmd.Parameters.AddWithValue("@usemail", textBox5.Text);
                 cmd.Parameters.AddWithValue("@usphone", textBox6.Text);

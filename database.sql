@@ -271,21 +271,21 @@ CREATE TABLE `user` (
   PRIMARY KEY (`US_ID`),
   KEY `US_TY_ID` (`US_TY_ID`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`US_TY_ID`) REFERENCES `type` (`TY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
 insert  into `user`(`US_ID`,`US_USERNAME`,`US_PASSWORD`,`US_NAME`,`US_EMAIL`,`US_PHONE`,`US_ADDRESS`,`US_TY_ID`,`US_SALARY`,`US_STATUS`) values 
-(1,'user1','user1','User 1','user1@examplemail.com','0123456789','Jalan User 1',1,1234567890,1),
-(2,'user2','user2','User 2','user2@examplemail.com','0123456789','Jalan User 2',2,1234567890,1),
-(3,'user3','user3','User 3','user3@examplemail.com','0123456789','Jalan User 3',3,1234567890,1),
-(4,'user4','user4','User 4','user4@examplemail.com','0123456789','Jalan User 4',4,1234567890,1),
-(5,'user5','user5','User 5','user5@examplemail.com','0123456789','Jalan User 5',5,1234567890,1),
-(6,'sales1','sales1','Sales 1','sales1@examplemail.com','0123456789','Jalan Sales 1',2,1234567890,1),
-(7,'sales2','sales2','Sales 2','sales2@examplemail.com','0123456789','Jalan Sales 2',2,1234567890,1),
-(8,'sales3','sales3','Sales 3','sales3@examplemail.com','0123456789','Jalan Sales 3',2,1234567890,1),
-(9,'sales4','sales4','Sales 4','sales4@examplemail.com','0123456789','Jalan Sales 4',2,1234567890,1),
-(10,'sales5','sales5','Sales 5','sales5@examplemail.com','0123456789','Jalan Sales 5',2,1234567890,1);
+(1,'user1','b3daa77b4c04a9551b8781d03191fe098f325e67','User 1','user1@examplemail.com','0123456789','Jalan User 1',1,1234567890,1),
+(2,'user2','a1881c06eec96db9901c7bbfe41c42a3f08e9cb4','User 2','user2@examplemail.com','0123456789','Jalan User 2',2,1234567890,1),
+(3,'user3','0b7f849446d3383546d15a480966084442cd2193','User 3','user3@examplemail.com','0123456789','Jalan User 3',3,1234567890,1),
+(4,'user4','06e6eef6adf2e5f54ea6c43c376d6d36605f810e','User 4','user4@examplemail.com','0123456789','Jalan User 4',4,1234567890,1),
+(5,'user5','7d112681b8dd80723871a87ff506286613fa9cf6','User 5','user5@examplemail.com','0123456789','Jalan User 5',5,1234567890,1),
+(6,'sales1','b669283569c1129056bd49700f2f21bd34ab866c','Sales 1','sales1@examplemail.com','0123456789','Jalan Sales 1',2,1234567890,1),
+(7,'sales2','504d61eaf5e5a2290e78acd6bbcf7e08cbe66232','Sales 2','sales2@examplemail.com','0123456789','Jalan Sales 2',2,1234567890,1),
+(8,'sales3','7f1bf5df1e39f792d0a90105ad4380523d8d517f','Sales 3','sales3@examplemail.com','0123456789','Jalan Sales 3',2,1234567890,1),
+(9,'sales4','02581797e1744faf016b5f2654ac4b1c3310d77e','Sales 4','sales4@examplemail.com','0123456789','Jalan Sales 4',2,1234567890,1),
+(10,'sales5','7b30747b5c6acee77259c8f0bdd38290dbe5c3fa','Sales 5','sales5@examplemail.com','0123456789','Jalan Sales 5',2,1234567890,1);
 
 /*Table structure for table `visit` */
 
@@ -359,15 +359,18 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateIDDtrans`() RETURNS varchar(50) CHARSET utf8mb4
 BEGIN
-                                    DECLARE idBesar INT;
-                                    DECLARE banyak_dtrans INT;
-                                    SELECT COUNT(*) INTO banyak_dtrans FROM dtrans_item;
-                                    IF (banyak_dtrans > 0) THEN
-                                            SELECT dt_id INTO idBesar FROM dtrans_item ORDER BY dt_id DESC LIMIT 1;
-                                    ELSE
-                                            SET idBesar = 0;
-                                    END IF;
-                                    RETURN idBesar+1;
+	                            DECLARE idBesar INT;
+	                            DECLARE banyak_dtrans INT;
+	
+	                            SELECT COUNT(*) INTO banyak_dtrans FROM dtrans_item;
+	
+	                            IF (banyak_dtrans > 0) THEN
+		                            SELECT dt_id INTO idBesar FROM dtrans_item ORDER BY dt_id DESC LIMIT 1;
+	                            ELSE 
+		                            SET idBesar = 0;
+	                            END IF;
+	
+	                            RETURN idBesar+1;
                                 END */$$
 DELIMITER ;
 
@@ -378,15 +381,18 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateIDHtrans`() RETURNS varchar(50) CHARSET utf8mb4
 BEGIN
-                                    DECLARE idBesar INT;
-                                    DECLARE banyak_htrans INT;
-                                    SELECT COUNT(*) INTO banyak_htrans FROM htrans_item;
-                                    IF (banyak_htrans > 0) THEN
-                                            SELECT ht_id INTO idBesar FROM htrans_item ORDER BY ht_id DESC LIMIT 1;
-                                    ELSE
-                                            SET idBesar = 0;
-                                    END IF;
-                                    RETURN idBesar+1;
+	                            DECLARE idBesar INT;
+	                            DECLARE banyak_htrans INT;
+	
+	                            SELECT COUNT(*) INTO banyak_htrans FROM htrans_item;
+	
+	                            IF (banyak_htrans > 0) THEN
+		                            SELECT ht_id INTO idBesar FROM htrans_item ORDER BY ht_id DESC LIMIT 1;
+	                            ELSE 
+		                            SET idBesar = 0;
+	                            END IF;
+	
+	                            RETURN idBesar+1;
                                 END */$$
 DELIMITER ;
 
@@ -397,15 +403,20 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `generateInvoice`() RETURNS varchar(50) CHARSET utf8mb4
 BEGIN
-                                    DECLARE hasil VARCHAR(50);
-                                    DECLARE banyakInvoice INT;
-                                    SELECT CONCAT('1',SUBSTR(YEAR(NOW()),3,2),
-                                    IF(MONTH(NOW()) >= 10, MONTH(NOW()), CONCAT('0',MONTH(NOW()))),
-                                    IF(DAY(NOW())>=10, DAY(NOW()), CONCAT('0',DAY(NOW()))),
-                                    '1') INTO hasil;
-                                    SELECT COUNT(*) INTO banyakInvoice FROM htrans_item WHERE ht_invoice_number LIKE CONCAT(hasil, '%');
-                                    SET hasil = CONCAT(hasil,LPAD(banyakInvoice+1,3,'0'));
-                                    RETURN hasil;
+	                            DECLARE hasil VARCHAR(50);
+	
+	                            DECLARE banyakInvoice INT;
+	
+	                            SELECT CONCAT('1',SUBSTR(YEAR(NOW()),3,2),
+	                            IF(MONTH(NOW()) >= 10, MONTH(NOW()), CONCAT('0',MONTH(NOW()))),
+	                            IF(DAY(NOW())>=10, DAY(NOW()), CONCAT('0',DAY(NOW()))),
+	                            '1') INTO hasil;
+	
+	                            SELECT COUNT(*) INTO banyakInvoice FROM htrans_item WHERE ht_invoice_number LIKE CONCAT(hasil, '%');
+		
+	                            SET hasil = CONCAT(hasil,LPAD(banyakInvoice+1,3,'0'));
+	
+	                            RETURN hasil;
                                 END */$$
 DELIMITER ;
 

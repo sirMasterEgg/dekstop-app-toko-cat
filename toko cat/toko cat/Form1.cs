@@ -196,7 +196,7 @@ namespace toko_cat
         private void button1_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable("user");
-            MySqlCommand cmd = new MySqlCommand("select * from user where US_USERNAME = @ususername and US_PASSWORD = @uspassword", Connection.Conn);
+            MySqlCommand cmd = new MySqlCommand("select * from user where US_USERNAME = @ususername and US_PASSWORD = sha1(@uspassword)", Connection.Conn);
             cmd.Parameters.AddWithValue("@ususername", textBox1.Text);
             cmd.Parameters.AddWithValue("@uspassword", textBox2.Text);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
