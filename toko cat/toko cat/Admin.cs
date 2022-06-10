@@ -412,7 +412,7 @@ namespace toko_cat
 
         private void button10_Click_1(object sender, EventArgs e)
         {
-            FormInvoice newForm = new FormInvoice(invoice);
+            FormInvoiceAdmin newForm = new FormInvoiceAdmin(invoice);
             newForm.StartPosition = FormStartPosition.CenterScreen;
 
             newForm.ShowDialog();   
