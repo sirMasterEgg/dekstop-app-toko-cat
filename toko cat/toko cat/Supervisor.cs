@@ -100,8 +100,7 @@ namespace toko_cat
                                 LEFT JOIN USER u ON u.US_ID = v.V_US_ID
                                 LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
                                 LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');
-                                ";
+                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w') AND u.US_ID = @id;";
             conn.Open();
             cmd.Parameters.Clear();
             cmd.Parameters.Add(new MySqlParameter("@id", id));
@@ -131,7 +130,8 @@ namespace toko_cat
                                 LEFT JOIN USER u ON u.US_ID = v.V_US_ID
                                 LEFT JOIN toko t ON t.TOKO_ID = v.V_TOKO_ID
                                 LEFT JOIN DAY d ON v.V_DA_ID = d.DA_ID
-                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w');";
+                                WHERE (d.DA_ID + 7) % 7 = DATE_FORMAT(NOW(), '%w')
+                                AND u.US_ID = @id;";
             cmd.Parameters.Clear();
             cmd.Parameters.Add(new MySqlParameter("@id", id));
             dtSupervisorTemp = Connection.executeAdapter(cmd);
@@ -202,7 +202,14 @@ namespace toko_cat
                     conn.Close();
 
                     MessageBox.Show("Sudah Absen!");
-                    loadDataGrid();
+                    if (cbsales.SelectedIndex == 0)
+                    {
+                        loadDataGrid();
+                    }
+                    else
+                    {
+                        loadDataGrid(true, (cbsales.SelectedItem as dynamic).Value);
+                    }
                 }
             }
             catch (Exception excep)
@@ -290,6 +297,11 @@ namespace toko_cat
             AbsenForm newForm = new AbsenForm();
             newForm.ShowDialog();
             this.Show();
+        }
+
+        private void dgvSupervisor_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
